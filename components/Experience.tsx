@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react'
 import { content } from '@/lib/content'
 import Landing from '@/components/Landing'
+import Slideshow from '@/components/Slideshow'
 
 type Step = 'landing' | 'slideshow' | 'wish' | 'minigame' | 'closing'
 
@@ -29,6 +30,9 @@ export default function Experience() {
           onPlay={handlePlay}
           onStart={handleStart}
         />
+      )}
+      {step === 'slideshow' && (
+        <Slideshow slides={content.slides} onDone={() => setStep('wish')} />
       )}
     </main>
   )
