@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import { content } from '@/lib/content'
 import Landing from '@/components/Landing'
 import Slideshow from '@/components/Slideshow'
+import MakeAWish from '@/components/MakeAWish'
 
 type Step = 'landing' | 'slideshow' | 'wish' | 'minigame' | 'closing'
 
@@ -34,6 +35,7 @@ export default function Experience() {
       {step === 'slideshow' && (
         <Slideshow slides={content.slides} onDone={() => setStep('wish')} />
       )}
+      {step === 'wish' && <MakeAWish onAdvance={() => setStep('minigame')} />}
     </main>
   )
 }
