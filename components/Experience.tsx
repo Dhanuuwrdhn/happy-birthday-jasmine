@@ -5,6 +5,7 @@ import { content } from '@/lib/content'
 import Landing from '@/components/Landing'
 import Slideshow from '@/components/Slideshow'
 import MakeAWish from '@/components/MakeAWish'
+import Minigame from '@/components/Minigame'
 
 type Step = 'landing' | 'slideshow' | 'wish' | 'minigame' | 'closing'
 
@@ -36,6 +37,9 @@ export default function Experience() {
         <Slideshow slides={content.slides} onDone={() => setStep('wish')} />
       )}
       {step === 'wish' && <MakeAWish onAdvance={() => setStep('minigame')} />}
+      {step === 'minigame' && (
+        <Minigame balls={content.balls} onDone={() => setStep('closing')} />
+      )}
     </main>
   )
 }
