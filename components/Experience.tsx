@@ -10,11 +10,11 @@ import Photo from '@/components/Photo'
 import Slideshow from '@/components/Slideshow'
 import Minigame from '@/components/Minigame'
 
-const STEPS = ['gift', 'special', 'letter', 'memories', 'gallery', 'prizebox', 'game', 'closing'] as const
+const STEPS = ['special', 'letter', 'memories', 'gallery', 'prizebox', 'game', 'closing'] as const
 type Step = (typeof STEPS)[number]
 
 export default function Experience() {
-  const [step, setStep] = useState<Step>('gift')
+  const [step, setStep] = useState<Step>('special')
   const [playing, setPlaying] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
 
@@ -43,21 +43,9 @@ export default function Experience() {
       <Petals />
       <audio ref={audioRef} src={content.audioSrc} loop preload="none" />
 
-      {step !== 'gift' && (
-        <button onClick={toggleAudio} className="audio-toggle label" title={content.audioTitle}>
-          {playing ? content.ui.soundOn : content.ui.soundOff}
-        </button>
-      )}
-
-      {step === 'gift' && (
-        <GiftBox
-          onOpened={() => {
-            // Tapping the box doubles as the browser's permission to start the music.
-            toggleAudio()
-            next()
-          }}
-        />
-      )}
+      <button onClick={toggleAudio} className="audio-toggle label" title={content.audioTitle}>
+        {playing ? content.ui.soundOn : content.ui.soundOff}
+      </button>
 
       {step === 'special' && (
         <section className="sheet sheet--note text-center">
@@ -68,7 +56,14 @@ export default function Experience() {
           <div className="rule" aria-hidden>
             <JasmineMark />
           </div>
-          <button onClick={next} className="btn">
+          <button
+            onClick={() => {
+              // First tap of the visit, so it is also the browser's permission to play music.
+              toggleAudio()
+              next()
+            }}
+            className="btn"
+          >
             {content.special.cta}
           </button>
         </section>
@@ -102,12 +97,7 @@ export default function Experience() {
       )}
 
       {step === 'prizebox' && (
-        <GiftBox
-          title={content.prizeBox.title}
-          hint={content.prizeBox.hint}
-          showDate={false}
-          onOpened={next}
-        />
+        <GiftBox title={content.prizeBox.title} hint={content.prizeBox.hint} onOpened={next} />
       )}
 
       {step === 'game' && (

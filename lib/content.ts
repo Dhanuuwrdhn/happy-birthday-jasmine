@@ -32,12 +32,6 @@ export const content = {
     sub: "There's something in here. It only opens on your birthday.",
   },
 
-  // --- The gift box: first screen after the door opens ---
-  giftTitle: 'This one is yours',
-  gift: {
-    hint: 'tap the box',
-  },
-
   // --- "Your Special Day" screen ---
   special: {
     title: 'Your Special Day',
@@ -131,7 +125,6 @@ export const content = {
     soundOn: 'sound on',
     soundOff: 'sound off',
     photoMissing: 'photo not added yet',
-    openGift: 'Open the gift box',
     paper: 'Paper',
     shuffling: 'shuffling...',
   },

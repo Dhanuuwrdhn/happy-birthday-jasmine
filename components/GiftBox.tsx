@@ -1,23 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-import { content } from '@/lib/content'
 
 type GiftBoxProps = {
   onOpened: () => void
-  title?: string
-  hint?: string
-  /** The date only belongs on the first box; the second one is just the prize. */
-  showDate?: boolean
+  title: string
+  hint: string
 }
 
 /** CSS gift box. The lid lifts when tapped, then onOpened fires. */
-export default function GiftBox({
-  onOpened,
-  title = content.giftTitle,
-  hint = content.gift.hint,
-  showDate = true,
-}: GiftBoxProps) {
+export default function GiftBox({ onOpened, title, hint }: GiftBoxProps) {
   const [opening, setOpening] = useState(false)
 
   function open() {
@@ -29,14 +21,13 @@ export default function GiftBox({
 
   return (
     <div className="stack gap-6 text-center">
-      {showDate && <p className="dateline">{content.dateline}</p>}
       <h1 className="hand-lg text-[2.6rem] sm:text-[3.2rem]">{title}</h1>
 
       <div className="gift-stage">
         <span className="gift-halo" aria-hidden />
         <button
           onClick={open}
-          aria-label={content.ui.openGift}
+          aria-label={title}
           className={`gift ${opening ? 'is-open' : ''}`}
         >
           <span className="gift-shadow" aria-hidden />
