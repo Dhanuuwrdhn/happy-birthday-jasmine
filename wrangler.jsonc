@@ -6,5 +6,13 @@
   "assets": {
     "directory": "./out",
     "not_found_handling": "404-page"
+  },
+  // Keep request logs so a failure on her birthday can actually be looked at.
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true,
+      "persist": true
+    }
   }
 }
