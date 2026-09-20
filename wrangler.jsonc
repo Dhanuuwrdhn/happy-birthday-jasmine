@@ -1,0 +1,10 @@
+{
+  // Static site: Cloudflare only serves the files that `npm run build` writes to out/.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "happy-birthday-jasmine",
+  "compatibility_date": "2026-09-21",
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page"
+  }
+}
