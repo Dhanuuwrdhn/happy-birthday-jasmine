@@ -1,7 +1,10 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+  // The whole site is client-side, so it exports to plain files in out/ and can
+  // be served by Cloudflare Pages without a server.
+  output: 'export',
+  images: { unoptimized: true },
+}
 
-export default nextConfig;
+export default nextConfig
