@@ -10,7 +10,7 @@ import Photo from '@/components/Photo'
 import Slideshow from '@/components/Slideshow'
 import Minigame from '@/components/Minigame'
 
-const STEPS = ['gift', 'special', 'letter', 'memories', 'gallery', 'game', 'closing'] as const
+const STEPS = ['gift', 'special', 'letter', 'memories', 'gallery', 'prizebox', 'game', 'closing'] as const
 type Step = (typeof STEPS)[number]
 
 export default function Experience() {
@@ -99,6 +99,15 @@ export default function Experience() {
             {content.ui.toGame}
           </button>
         </section>
+      )}
+
+      {step === 'prizebox' && (
+        <GiftBox
+          title={content.prizeBox.title}
+          hint={content.prizeBox.hint}
+          showDate={false}
+          onOpened={next}
+        />
       )}
 
       {step === 'game' && (

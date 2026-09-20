@@ -80,6 +80,12 @@ export const content = {
     { src: '/photos/09.jpg' },
   ] satisfies Photo[],
 
+  // --- The second box: it teases the game before the prizes ---
+  prizeBox: {
+    title: 'Want your present?',
+    hint: 'you have to play for it first, hehe',
+  },
+
   // --- Minigame: four face-down papers ---
   prizeIntro: 'Your present is hiding in one of these.',
   prizeNudge: 'pick one',

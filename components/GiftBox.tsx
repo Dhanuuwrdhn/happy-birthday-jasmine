@@ -3,8 +3,21 @@
 import { useState } from 'react'
 import { content } from '@/lib/content'
 
+type GiftBoxProps = {
+  onOpened: () => void
+  title?: string
+  hint?: string
+  /** The date only belongs on the first box; the second one is just the prize. */
+  showDate?: boolean
+}
+
 /** CSS gift box. The lid lifts when tapped, then onOpened fires. */
-export default function GiftBox({ onOpened }: { onOpened: () => void }) {
+export default function GiftBox({
+  onOpened,
+  title = content.giftTitle,
+  hint = content.gift.hint,
+  showDate = true,
+}: GiftBoxProps) {
   const [opening, setOpening] = useState(false)
 
   function open() {
@@ -16,8 +29,8 @@ export default function GiftBox({ onOpened }: { onOpened: () => void }) {
 
   return (
     <div className="stack gap-6 text-center">
-      <p className="dateline">{content.dateline}</p>
-      <h1 className="hand-lg text-[2.6rem] sm:text-[3.2rem]">{content.giftTitle}</h1>
+      {showDate && <p className="dateline">{content.dateline}</p>}
+      <h1 className="hand-lg text-[2.6rem] sm:text-[3.2rem]">{title}</h1>
 
       <div className="gift-stage">
         <span className="gift-halo" aria-hidden />
@@ -37,7 +50,7 @@ export default function GiftBox({ onOpened }: { onOpened: () => void }) {
         </button>
       </div>
 
-      <p className="hand">{opening ? '' : content.gift.hint}</p>
+      <p className="hand">{opening ? '' : hint}</p>
     </div>
   )
 }
