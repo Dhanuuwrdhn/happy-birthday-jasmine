@@ -1,5 +1,10 @@
+import Gate from '@/components/Gate'
 import Experience from '@/components/Experience'
 
 export default function Home() {
-  return <Experience />
+  return (
+    <Gate>
+      <Experience />
+    </Gate>
+  )
 }

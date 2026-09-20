@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# happy-birthday-jasmine
 
-## Getting Started
+A birthday site for Jasmine Adlina. It stays locked until 27 September 2026, then
+opens as a paper letter set: a wrapped gift, a handwritten note, a letter that types
+itself out, photographs, and a small game hiding two real presents.
 
-First, run the development server:
+Created with love by Syahrial Danu, for Jasmine Adlina.
+
+## Running it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run check    # unlock date + prize logic self-check
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Add `?preview=1` to the URL to skip the countdown while testing.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## What to fill in
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Everything the site says lives in `lib/content.ts`.
 
-## Learn More
+| What | Where |
+| --- | --- |
+| The letter | `content.letter` — replace every `[bracket]` with what actually happened |
+| Photos | `public/photos/01.jpg` … `09.jpg`, listed in `content.slides` and `content.gallery` |
+| Song | `public/audio/happy-birthday-pamungkas.mp3` (Pamungkas — Happy Birthday) |
+| The two prizes | `content.prizes` |
+| Unlock date | `unlockAt` in `lib/content.ts` |
 
-To learn more about Next.js, take a look at the following resources:
+## How it works
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **The gate** (`components/Gate.tsx`) reads the browser clock and renders the site
+  only once 27 September 2026 00:00 WIB has passed.
+- **The game** (`components/Minigame.tsx`) is rigged on purpose: picks miss for a
+  random two to four tries before a prize appears, and the slips are swept around
+  after every pick. It always ends with both presents found.
+- **The look** is one idea carried through: every step is a different piece of
+  paper — a sealed envelope, a folded note, ruled letter paper, an album page,
+  folded slips — with a jasmine sprig as the recurring mark.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built with Next.js, Tailwind, Cormorant Garamond and Caveat.

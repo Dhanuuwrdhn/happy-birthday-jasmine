@@ -1,6 +1,795 @@
 @import "tailwindcss";
 
+/* The whole site is one paper letter set: envelope, folded note, ruled sheet,
+   album page, folded slips. Colours come from aged paper, plum ink and sealing
+   wax — not from a UI palette. */
+:root {
+  --surface: #ddc2bd;
+  --surface-deep: #c9a5a2;
+  --paper: #fcf7f0;
+  --paper-edge: #f1e5d6;
+  --paper-album: #f6ece0;
+  --ink: #3e2a2e;
+  --ink-soft: rgba(62, 42, 46, 0.62);
+  --ink-faint: rgba(62, 42, 46, 0.3);
+  --rose: #b04a63;
+  --gold: #b4884f;
+  --rule: rgba(62, 42, 46, 0.14);
+}
+
 html,
 body {
   height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  color: var(--ink);
+  background: var(--surface);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.0625rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* One full screen, contents centred. Taller contents (a long letter) grow the
+   page rather than being clipped. */
+.page {
+  position: relative;
+  display: grid;
+  place-items: center;
+  place-items: safe center;
+  min-height: 100dvh;
+  padding: 3.5rem 1.25rem;
+  z-index: 1;
+}
+
+/* The surface the paper lies on: light falling from the upper left, corners
+   falling away. Static — the paper should look still, not swimming. */
+.aurora {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(70% 55% at 28% 12%, rgba(255, 243, 232, 0.85), transparent 68%),
+    radial-gradient(60% 50% at 82% 88%, rgba(180, 132, 132, 0.45), transparent 70%),
+    radial-gradient(circle at 50% 44%, transparent 34%, rgba(107, 66, 72, 0.32) 100%);
+}
+
+/* Linen weave in the surface, so the backdrop reads as cloth under the paper. */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.3'/%3E%3C/svg%3E");
+}
+
+/* Petals drifting past. The only ambient motion on the page. */
+.petal {
+  position: fixed;
+  top: -6%;
+  width: 17px;
+  height: 17px;
+  pointer-events: none;
+  background: linear-gradient(140deg, #e8b3bd, rgba(176, 74, 99, 0.8));
+  border-radius: 50% 6% 50% 50%;
+  opacity: 0;
+  box-shadow: 0 2px 6px rgba(107, 66, 72, 0.2);
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -10vh, 0) rotate(0deg);
+  }
+  8% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate3d(38px, 52vh, 0) rotate(190deg);
+  }
+  88% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-22px, 108vh, 0) rotate(420deg);
+  }
+}
+
+/* ---------- Paper ---------- */
+
+/* A sheet of paper set down on the surface: square corners, a tight contact
+   shadow under the edge and a soft one further out. */
+.sheet {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: min(100%, 27rem);
+  padding: 3rem 2.5rem 2.5rem;
+  border-radius: 2px;
+  background: linear-gradient(172deg, var(--paper) 0%, var(--paper-edge) 100%);
+  box-shadow:
+    0 1px 2px rgba(107, 66, 72, 0.3),
+    0 18px 40px rgba(107, 66, 72, 0.28);
+  transform: rotate(-0.4deg);
+}
+
+.sheet--wide {
+  width: min(100%, 42rem);
+}
+
+/* The note that was folded inside the envelope: a crease across the middle,
+   with the paper catching light differently above and below it. */
+.sheet--note {
+  width: min(100%, 24rem);
+  padding: 3.5rem 2.5rem 3rem;
+  transform: rotate(0.6deg);
+}
+
+.sheet--note::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 63%;
+  height: 2px;
+  background: linear-gradient(
+    180deg,
+    rgba(107, 66, 72, 0.1),
+    rgba(255, 255, 255, 0.8)
+  );
+  pointer-events: none;
+}
+
+/* Letter paper: faint ruled lines, the way a writing pad is printed. */
+.sheet--ruled {
+  background-color: var(--paper);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0 calc(2rem - 1px),
+    rgba(62, 42, 46, 0.07) calc(2rem - 1px) 2rem
+  );
+  background-position: 0 3rem;
+}
+
+/* Album page: a warmer, heavier stock for the photographs to sit on. */
+.sheet--album {
+  background: linear-gradient(172deg, var(--paper-album), #eddfcf);
+  transform: rotate(0.3deg);
+}
+
+.stack {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+  width: 100%;
+  max-width: 34rem;
+}
+
+/* Contents of a sheet space themselves; a .stack inside just fills the width. */
+.sheet .stack {
+  gap: 1.5rem;
+  max-width: none;
+}
+
+/* ---------- Type ---------- */
+
+.title {
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+
+/* Your handwriting. Used for anything a person would have written by hand:
+   greetings, the hints, the signature. */
+.hand {
+  font-family: var(--font-hand), cursive;
+  font-weight: 400;
+  color: var(--ink-soft);
+  font-size: 1.15rem;
+}
+
+.hand-lg {
+  font-family: var(--font-hand), cursive;
+  font-weight: 600;
+  line-height: 1.05;
+  color: var(--rose);
+}
+
+.muted {
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+/* The date, set the way it would be printed at the head of a letter. */
+.dateline {
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+}
+
+/* The jasmine sprig: drawn once, used large above a heading and small as the
+   divider between sections. It is her name, so it earns its place. */
+.sprig {
+  width: 11rem;
+  height: auto;
+  color: var(--rose);
+}
+
+.mark {
+  flex: 0 0 auto;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--rose);
+}
+
+/* A hairline broken in the middle by the jasmine mark. */
+.rule {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 11rem;
+  color: var(--rule);
+}
+
+.rule::before,
+.rule::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+/* The line at the very end, set small: it signs the work without interrupting it. */
+.credit {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  color: var(--ink-faint);
+}
+
+/* ---------- Controls ---------- */
+
+.btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.7rem 2rem;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--paper);
+  background: var(--rose);
+  box-shadow: 0 6px 16px rgba(176, 74, 99, 0.3);
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  background: #9c3e56;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+}
+
+.btn-ghost {
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.65rem 1.5rem;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+  background: transparent;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  border-color: var(--rose);
+  color: var(--rose);
+}
+
+.btn-ghost:disabled {
+  opacity: 0.35;
+}
+
+.audio-toggle {
+  position: fixed;
+  top: 1.1rem;
+  right: 1.1rem;
+  z-index: 10;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 999px;
+  background: rgba(252, 247, 240, 0.7);
+  font-family: var(--font-hand), cursive;
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Photographs ---------- */
+
+/* Prints mounted on the album page: white border, thicker at the bottom where
+   the caption would be written. */
+.frame {
+  padding: 9px 9px 30px;
+  background: #fffdfa;
+  border-radius: 1px;
+  box-shadow:
+    0 1px 2px rgba(107, 66, 72, 0.28),
+    0 10px 24px rgba(107, 66, 72, 0.2);
+  transform: rotate(-1.4deg);
+}
+
+.frame:nth-child(even) {
+  transform: rotate(1.6deg);
+}
+
+.frame-inner {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  background: var(--paper-edge);
+}
+
+.frame-empty {
+  display: grid;
+  place-items: center;
+}
+
+/* ---------- The letter ---------- */
+
+.letter {
+  width: 100%;
+  font-size: 1.15rem;
+  line-height: 2rem;
+  text-align: left;
+}
+
+.letter p + p {
+  margin-top: 2rem;
+}
+
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  background: var(--rose);
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ---------- Countdown ---------- */
+
+.counter {
+  display: flex;
+  width: 100%;
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.counter-cell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.counter-cell + .counter-cell {
+  border-left: 1px solid var(--rule);
+}
+
+.counter-num {
+  font-size: 2.6rem;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.counter-label {
+  font-family: var(--font-hand), cursive;
+  font-size: 1rem;
+  color: var(--ink-soft);
+}
+
+.envelope {
+  width: 104px;
+  color: var(--rose);
+}
+
+/* ---------- The game ---------- */
+
+/* Folded slips of paper, each with a crease down its middle. */
+.paper {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 9rem;
+  padding: 1rem;
+  font-size: 1rem;
+  line-height: 1.45;
+  text-align: center;
+  color: var(--ink);
+  background: linear-gradient(100deg, #fffdfa 0%, #f3e8da 50%, #fffdfa 51%, #f0e3d3 100%);
+  border-radius: 1px;
+  box-shadow:
+    0 1px 2px rgba(107, 66, 72, 0.25),
+    0 8px 18px rgba(107, 66, 72, 0.18);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.paper:nth-child(odd) {
+  transform: rotate(-1.6deg);
+}
+
+.paper:nth-child(even) {
+  transform: rotate(1.6deg);
+}
+
+.paper:hover:not(:disabled) {
+  transform: translateY(-6px) rotate(0deg);
+  box-shadow:
+    0 1px 2px rgba(107, 66, 72, 0.25),
+    0 16px 28px rgba(107, 66, 72, 0.24);
+}
+
+.paper-num {
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+.paper-prize {
+  font-family: var(--font-hand), cursive;
+  font-size: 1.3rem;
+  line-height: 1.3;
+  color: var(--rose);
+}
+
+/* The slips being swept around after each pick. They are identical face down,
+   so a quick sweep sells the shuffle without moving anything for real. */
+.is-shuffling .paper {
+  animation: sweep 0.7s ease-in-out;
+}
+
+@keyframes sweep {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  30% {
+    transform: translateX(15px) rotate(7deg);
+  }
+  65% {
+    transform: translateX(-15px) rotate(-7deg);
+  }
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+.prize-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+/* ---------- The gift box ---------- */
+
+/* The box needs room around it, or it floats alone in an empty field. */
+.gift-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(100%, 22rem);
+  height: 17rem;
+}
+
+/* Warm light pooling around the box, as if the room were lit by it. */
+.gift-halo {
+  position: absolute;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255, 244, 228, 0.9), rgba(232, 179, 189, 0.3) 45%, transparent 70%);
+  pointer-events: none;
+}
+
+.gift {
+  position: relative;
+  width: 240px;
+  height: 226px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+}
+
+.gift-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  width: 196px;
+  height: 22px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: radial-gradient(ellipse at center, rgba(107, 66, 72, 0.38), transparent 70%);
+}
+
+.gift-body {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 186px;
+  height: 140px;
+  transform: translateX(-50%);
+  border-radius: 3px;
+  background: linear-gradient(155deg, #d98b9e 0%, #b8536c 55%, #9c3e56 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.3),
+    0 14px 30px rgba(107, 66, 72, 0.32);
+}
+
+/* Ribbon: one band down the box, one across it. */
+.gift-band,
+.gift-band::after {
+  position: absolute;
+  background: linear-gradient(180deg, #f2ddb5, var(--gold));
+}
+
+.gift-band {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 26px;
+  transform: translateX(-50%);
+}
+
+.gift-band::after {
+  content: '';
+  top: 54px;
+  left: -80px;
+  width: 186px;
+  height: 18px;
+  background: linear-gradient(90deg, #e6cb9b, #f2ddb5);
+  opacity: 0.9;
+}
+
+.gift-lid {
+  position: absolute;
+  left: 50%;
+  bottom: 132px;
+  width: 212px;
+  height: 40px;
+  transform: translateX(-50%);
+  border-radius: 3px;
+  background: linear-gradient(155deg, #e09aac, #b8536c);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.35),
+    0 8px 18px rgba(107, 66, 72, 0.3);
+  transform-origin: left bottom;
+  transition: transform 0.9s cubic-bezier(0.34, 1.3, 0.64, 1);
+}
+
+/* The bow: two loops and a knot. */
+.gift-bow,
+.gift-bow::before,
+.gift-bow::after {
+  position: absolute;
+  background: linear-gradient(160deg, #f2ddb5, var(--gold));
+}
+
+.gift-bow {
+  top: -18px;
+  left: 50%;
+  width: 22px;
+  height: 20px;
+  transform: translateX(-50%);
+  border-radius: 6px;
+}
+
+.gift-bow::before,
+.gift-bow::after {
+  content: '';
+  top: -2px;
+  width: 40px;
+  height: 26px;
+  border-radius: 60% 40% 55% 45%;
+}
+
+.gift-bow::before {
+  left: -37px;
+  transform: rotate(-16deg);
+}
+
+.gift-bow::after {
+  right: -37px;
+  transform: rotate(16deg) scaleX(-1);
+}
+
+.gift-burst {
+  position: absolute;
+  left: 50%;
+  bottom: 86px;
+  width: 12px;
+  height: 12px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #fff6e4;
+  opacity: 0;
+  box-shadow: 0 0 46px 20px rgba(242, 221, 181, 0.9);
+}
+
+.gift:hover .gift-lid {
+  transform: translateX(-50%) translateY(-8px);
+}
+
+.gift.is-open {
+  animation: gift-shake 0.45s ease-in-out;
+  pointer-events: none;
+}
+
+.gift.is-open .gift-lid {
+  transform: translateX(-50%) translate(38px, -118px) rotate(26deg);
+}
+
+.gift.is-open .gift-burst {
+  animation: gift-burst 1.1s 0.35s ease-out forwards;
+}
+
+@keyframes gift-shake {
+  0%,
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-6px) rotate(-3deg);
+  }
+  75% {
+    transform: translateX(6px) rotate(3deg);
+  }
+}
+
+@keyframes gift-burst {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.4);
+  }
+  45% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.8);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scale(6);
+  }
+}
+
+/* ---------- Small screens (phones) ---------- */
+/* She will most likely open this on a phone, so this is the everyday case. */
+@media (max-width: 640px) {
+  .page {
+    padding: 2rem 1rem;
+  }
+
+  .sheet {
+    gap: 1.25rem;
+    padding: 2.25rem 1.4rem 2rem;
+  }
+
+  .sheet--note {
+    padding: 2.75rem 1.4rem 2.5rem;
+  }
+
+  /* The countdown must still fit four columns without clipping. */
+  .counter-num {
+    font-size: 1.9rem;
+  }
+
+  .counter-label {
+    font-size: 0.85rem;
+  }
+
+  .dateline {
+    font-size: 0.85rem;
+  }
+
+  .envelope {
+    width: 80px;
+  }
+
+  .letter {
+    font-size: 1.08rem;
+    line-height: 1.9rem;
+  }
+
+  .letter p + p {
+    margin-top: 1.5rem;
+  }
+
+  .paper {
+    min-height: 7.5rem;
+    font-size: 0.92rem;
+  }
+
+  .paper-prize {
+    font-size: 1.1rem;
+  }
+
+  .gift-stage {
+    height: 15rem;
+  }
+
+  .gift-halo {
+    width: 15rem;
+    height: 15rem;
+  }
+
+  .gift {
+    width: 180px;
+    height: 172px;
+  }
+
+  .gift-body {
+    width: 140px;
+    height: 106px;
+  }
+
+  .gift-lid {
+    width: 160px;
+    height: 32px;
+    bottom: 98px;
+  }
+
+  .gift-band::after {
+    top: 40px;
+    left: -60px;
+    width: 140px;
+  }
+
+  .gift-shadow {
+    width: 148px;
+  }
+
+  .gift.is-open .gift-lid {
+    transform: translateX(-50%) translate(28px, -90px) rotate(26deg);
+  }
+
+  .audio-toggle {
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+}
+
+/* Respect the "reduce motion" setting on phones and laptops. */
+@media (prefers-reduced-motion: reduce) {
+  .petal,
+  .paper,
+  .frame,
+  .gift,
+  .gift-lid,
+  .gift-burst,
+  .caret,
+  .is-shuffling .paper {
+    animation: none;
+    transition: none;
+  }
 }

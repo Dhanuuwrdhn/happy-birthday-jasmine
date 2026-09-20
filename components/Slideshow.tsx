@@ -1,39 +1,27 @@
 'use client'
 
 import { useState } from 'react'
-import type { Slide } from '@/lib/content'
+import { content, type Slide } from '@/lib/content'
+import Photo from '@/components/Photo'
 
-type SlideshowProps = {
-  slides: Slide[]
-  onDone: () => void
-}
-
-export default function Slideshow({ slides, onDone }: SlideshowProps) {
-  const [index, setIndex] = useState(0)
-  const slide = slides[index]
-  const isLast = index === slides.length - 1
+export default function Slideshow({ slides, onDone }: { slides: Slide[]; onDone: () => void }) {
+  const [i, setI] = useState(0)
+  const slide = slides[i]
+  const isLast = i === slides.length - 1
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-8 p-8 text-center text-rose-50">
-      {slide.photoUrl && (
-        // ponytail: plain <img>, swap to next/image if LCP/optimization ever matters
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={slide.photoUrl} alt="" className="max-h-64 rounded-lg object-cover shadow-lg" />
-      )}
-      <p className="max-w-md text-xl">{slide.text}</p>
-      <div className="flex gap-4">
-        <button
-          onClick={() => setIndex((i) => i - 1)}
-          disabled={index === 0}
-          className="rounded-full bg-rose-900 px-6 py-3 font-semibold text-rose-50 transition hover:bg-rose-800 disabled:opacity-30"
-        >
-          Prev
+    <div className="stack">
+      <Photo src={slide.photo} className="w-60 sm:w-72" />
+      <p className="hand max-w-sm text-center text-[1.35rem]">{slide.caption}</p>
+      <div className="flex items-center gap-3">
+        <button onClick={() => setI((n) => n - 1)} disabled={i === 0} className="btn-ghost">
+          {content.ui.prev}
         </button>
-        <button
-          onClick={() => (isLast ? onDone() : setIndex((i) => i + 1))}
-          className="rounded-full bg-amber-400 px-6 py-3 font-semibold text-rose-950 transition hover:bg-amber-300"
-        >
-          {isLast ? 'Continue to make a wish' : 'Next'}
+        <span className="hand whitespace-nowrap tabular-nums">
+          {i + 1} / {slides.length}
+        </span>
+        <button onClick={() => (isLast ? onDone() : setI((n) => n + 1))} className="btn">
+          {isLast ? content.ui.continue : content.ui.next}
         </button>
       </div>
     </div>

@@ -1,62 +1,100 @@
 'use client'
 
 import { useState } from 'react'
-import type { BallContent } from '@/lib/content'
-import { shuffleBalls } from '@/lib/shuffleBalls'
+import { content } from '@/lib/content'
+import { nextOutcome, teaseTarget } from '@/lib/logic'
+import { JasmineMark } from '@/components/Jasmine'
 
-type MinigameProps = {
-  balls: BallContent[]
-  onDone: () => void
-}
+const REVEAL_MS = 1400
+const SHUFFLE_MS = 700
 
-export default function Minigame({ balls, onDone }: MinigameProps) {
-  const [shuffled] = useState(() => {
-    const result = shuffleBalls(balls)
-    if (process.env.NODE_ENV !== 'production') {
-      console.assert(
-        result.filter((b) => b.isPrize).length === 1,
-        'Minigame: expected exactly one prize ball in content.balls'
-      )
+/**
+ * Four face-down papers that get shuffled again after every pick.
+ * ponytail: the papers are identical while face down, so there is nothing to track —
+ * the shuffle is pure theatre and the result is decided at pick time by nextOutcome().
+ * That keeps her losing for a while without ever making the game unwinnable.
+ */
+export default function Minigame({ onDone }: { onDone: () => void }) {
+  const [misses, setMisses] = useState(0)
+  const [target, setTarget] = useState(teaseTarget)
+  const [found, setFound] = useState<string[]>([])
+  const [picked, setPicked] = useState<number | null>(null)
+  const [reveal, setReveal] = useState<{ text: string; isPrize: boolean } | null>(null)
+  const [shuffling, setShuffling] = useState(false)
+
+  const done = found.length === content.prizes.length
+  const busy = reveal !== null || shuffling
+
+  function pick(i: number) {
+    if (busy || done) return
+
+    const outcome = nextOutcome(misses, target, found.length)
+    setPicked(i)
+
+    if (outcome.kind === 'prize') {
+      const prize = content.prizes[outcome.index]
+      setReveal({ text: prize, isPrize: true })
+      setFound((prev) => [...prev, prize])
+      setMisses(0)
+      setTarget(teaseTarget())
+    } else {
+      setReveal({ text: content.teases[misses % content.teases.length], isPrize: false })
+      setMisses((n) => n + 1)
     }
-    return result
-  })
-  const [openedIndices, setOpenedIndices] = useState<Set<number>>(new Set())
-  const [lastOpened, setLastOpened] = useState<number | null>(null)
 
-  function openBall(i: number) {
-    setOpenedIndices((prev) => new Set(prev).add(i))
-    setLastOpened(i)
+    // Show the result, then sweep the papers around and turn them all back over.
+    setTimeout(() => {
+      setReveal(null)
+      setPicked(null)
+      setShuffling(true)
+      setTimeout(() => setShuffling(false), SHUFFLE_MS)
+    }, REVEAL_MS)
   }
 
-  const foundPrize = lastOpened !== null && shuffled[lastOpened].isPrize
-
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-8 p-8 text-center text-rose-50">
-      <h2 className="font-[family-name:var(--font-playfair)] text-3xl">Pick a ball!</h2>
-      <div className="grid grid-cols-4 gap-4">
-        {shuffled.map((ball, i) => (
+    <div className="stack">
+      <p className="title text-center text-2xl">{content.prizeIntro}</p>
+
+      <div className={`grid w-full grid-cols-2 gap-4 sm:grid-cols-4 ${shuffling ? 'is-shuffling' : ''}`}>
+        {[0, 1, 2, 3].map((i) => (
           <button
             key={i}
-            onClick={() => openBall(i)}
-            disabled={openedIndices.has(i)}
-            className="flex h-16 w-16 items-center justify-center rounded-full bg-amber-400 text-2xl shadow-lg transition hover:scale-105 disabled:opacity-40"
+            onClick={() => pick(i)}
+            disabled={busy || done}
+            aria-label={`${content.ui.paper} ${i + 1}`}
+            className="paper"
           >
-            🔮
+            {picked === i && reveal ? (
+              <span className={reveal.isPrize ? 'paper-prize' : 'muted'}>{reveal.text}</span>
+            ) : (
+              <span className="paper-num">{i + 1}</span>
+            )}
           </button>
         ))}
       </div>
-      {lastOpened !== null && (
-        <div className="rounded-lg bg-rose-900/80 p-6">
-          <p className="text-lg">{shuffled[lastOpened].resultText}</p>
-        </div>
-      )}
-      {foundPrize && (
-        <button
-          onClick={onDone}
-          className="rounded-full bg-amber-400 px-6 py-3 font-semibold text-rose-950 transition hover:bg-amber-300"
-        >
-          Continue
-        </button>
+
+      {found.length > 0 && !done && <p className="hand">{content.prizeFound}</p>}
+
+      {done ? (
+        <>
+          <h3 className="hand-lg text-[2.4rem]">{content.win.title}</h3>
+          <div className="rule" aria-hidden>
+            <JasmineMark />
+          </div>
+          <div className="prize-list">
+            {found.map((prize) => (
+              <p key={prize} className="paper-prize text-center">
+                {prize}
+              </p>
+            ))}
+          </div>
+          <p className="muted max-w-sm text-center">{content.win.line}</p>
+          <button onClick={onDone} className="btn">
+            {content.ui.continue}
+          </button>
+        </>
+      ) : (
+        <p className="hand">{shuffling ? content.ui.shuffling : content.prizeNudge}</p>
       )}
     </div>
   )
