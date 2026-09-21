@@ -10,7 +10,7 @@ import Slideshow from '@/components/Slideshow'
 import VideoMemory from '@/components/VideoMemory'
 import Minigame from '@/components/Minigame'
 
-const STEPS = ['special', 'letter', 'memories', 'video', 'prizebox', 'game', 'closing'] as const
+const STEPS = ['special', 'letter', 'video', 'memories', 'prizebox', 'game', 'closing'] as const
 type Step = (typeof STEPS)[number]
 
 export default function Experience() {
