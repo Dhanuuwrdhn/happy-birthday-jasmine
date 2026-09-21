@@ -8,8 +8,9 @@ import Petals from '@/components/Petals'
 import Letter from '@/components/Letter'
 import VideoMemory from '@/components/VideoMemory'
 import Minigame from '@/components/Minigame'
+import Mood from '@/components/Mood'
 
-const STEPS = ['special', 'letter', 'video', 'prizebox', 'game', 'closing'] as const
+const STEPS = ['special', 'letter', 'video', 'prizebox', 'game', 'mood', 'closing'] as const
 type Step = (typeof STEPS)[number]
 
 export default function Experience() {
@@ -136,6 +137,8 @@ export default function Experience() {
           <Minigame onDone={next} />
         </section>
       )}
+
+      {step === 'mood' && <Mood onDone={next} />}
 
       {step === 'closing' && (
         <section className="sheet sheet--note text-center">

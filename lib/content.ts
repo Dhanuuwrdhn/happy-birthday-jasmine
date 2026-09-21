@@ -95,6 +95,19 @@ export const content = {
     line: 'You got both of them. Tell me what you want, and where you want to eat.',
   },
 
+  // --- One last question before the goodbye ---
+  mood: {
+    question: 'How are you feeling today?',
+    happy: 'Happy',
+    sad: 'Gloomy',
+    hint: 'pick one, honestly',
+    confirm: "Are you sure you're happy?",
+    yes: 'Yes',
+    no: 'No',
+    chase: 'catch it first, hehe',
+    tease: 'that one is not for you',
+  },
+
   closing: {
     title: "That's all of it.",
     line: 'Thank you for going all the way to the last page. Happy birthday, Jasmine.',
