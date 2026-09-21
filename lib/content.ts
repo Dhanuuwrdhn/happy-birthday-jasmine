@@ -18,13 +18,9 @@ export const content = {
   // Who the letter is signed by. Swap in whatever she actually calls you.
   from: 'Danu',
 
-  /**
-   * Background song: Pamungkas - Happy Birthday.
-   * TODO(dhanu): drop the file yourself at public/audio/happy-birthday-pamungkas.mp3
-   * (I can't download the song for you — it's copyrighted).
-   */
-  audioSrc: '/audio/happy-birthday-pamungkas.mp3',
-  audioTitle: 'Pamungkas - Happy Birthday',
+  // Background song. It pauses on its own while the video is playing.
+  audioSrc: '/audio/happy-birthday-piano.mp3',
+  audioTitle: 'Happy Birthday — piano cover by Miranda Wong',
 
   // --- Countdown screen (she can open this any time before the date) ---
   gate: {
@@ -40,7 +36,6 @@ export const content = {
   },
 
   memoriesTitle: 'Our Memories',
-  galleryTitle: "The rest that didn't fit above",
 
   /**
    * The letter. One string = one paragraph.
@@ -64,15 +59,20 @@ export const content = {
     { photo: '/photos/03.jpg', caption: '[the story behind this one]' },
   ] satisfies Slide[],
 
-  // --- Gallery: a grid of photos, no long stories ---
-  gallery: [
-    { src: '/photos/04.jpg' },
-    { src: '/photos/05.jpg' },
-    { src: '/photos/06.jpg' },
-    { src: '/photos/07.jpg' },
-    { src: '/photos/08.jpg' },
-    { src: '/photos/09.jpg' },
-  ] satisfies Photo[],
+  // --- The video: its own screen, right after the photos ---
+  // Put the file at public/videos/our-memories.mp4 (keep it under 25 MB — that is
+  // the per-file limit on Cloudflare, so compress it if your phone's clip is bigger).
+  video: {
+    src: '/videos/our-memories.mp4',
+    title: 'One more thing',
+    confirm: 'Are you sure you want to play this?',
+    yes: 'Play it',
+    no: 'Not yet',
+    tease: 'you have to watch it, hehe',
+    after: 'Sorry if the edit is bad. I tried.',
+    cta: 'Continue',
+    missing: 'video not added yet',
+  },
 
   // --- The second box: it teases the game before the prizes ---
   prizeBox: {
@@ -120,7 +120,6 @@ export const content = {
     prev: 'Previous',
     continue: 'Continue',
     skip: 'skip',
-    toPhotos: 'There are photos too',
     toGame: 'One last little game',
     soundOn: 'sound on',
     soundOff: 'sound off',

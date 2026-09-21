@@ -1,3 +1,3 @@
-Taruh lagunya di folder ini dengan nama: happy-birthday-pamungkas.mp3
+Song file: happy-birthday-piano.mp3
 
-Kalau nama filenya beda, ubah `audioSrc` di lib/content.ts.
+If you swap it for another track, rename it or change `audioSrc` in lib/content.ts.

@@ -6,11 +6,11 @@ import GiftBox from '@/components/GiftBox'
 import { JasmineSprig, JasmineMark } from '@/components/Jasmine'
 import Petals from '@/components/Petals'
 import Letter from '@/components/Letter'
-import Photo from '@/components/Photo'
 import Slideshow from '@/components/Slideshow'
+import VideoMemory from '@/components/VideoMemory'
 import Minigame from '@/components/Minigame'
 
-const STEPS = ['special', 'letter', 'memories', 'gallery', 'prizebox', 'game', 'closing'] as const
+const STEPS = ['special', 'letter', 'memories', 'video', 'prizebox', 'game', 'closing'] as const
 type Step = (typeof STEPS)[number]
 
 export default function Experience() {
@@ -20,6 +20,21 @@ export default function Experience() {
 
   function next() {
     setStep((s) => STEPS[Math.min(STEPS.indexOf(s) + 1, STEPS.length - 1)])
+  }
+
+  function pauseAudio() {
+    const el = audioRef.current
+    if (el && !el.paused) {
+      el.pause()
+      setPlaying(false)
+    }
+  }
+
+  function resumeAudio() {
+    audioRef.current
+      ?.play()
+      .then(() => setPlaying(true))
+      .catch(() => setPlaying(false))
   }
 
   function toggleAudio() {
@@ -82,17 +97,13 @@ export default function Experience() {
         </section>
       )}
 
-      {step === 'gallery' && (
-        <section className="sheet sheet--album sheet--wide">
-          <h2 className="hand text-center text-[1.4rem]">{content.galleryTitle}</h2>
-          <div className="grid w-full grid-cols-2 gap-3 sm:grid-cols-3">
-            {content.gallery.map((photo) => (
-              <Photo key={photo.src} src={photo.src} className="aspect-square w-full" />
-            ))}
-          </div>
-          <button onClick={next} className="btn">
-            {content.ui.toGame}
-          </button>
+      {step === 'video' && (
+        <section className="sheet sheet--album">
+          <VideoMemory
+            onDone={next}
+            onPlay={pauseAudio}
+            onEnded={resumeAudio}
+          />
         </section>
       )}
 
