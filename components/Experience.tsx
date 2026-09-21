@@ -1,22 +1,39 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { content } from '@/lib/content'
 import GiftBox from '@/components/GiftBox'
 import { JasmineSprig, JasmineMark } from '@/components/Jasmine'
 import Petals from '@/components/Petals'
 import Letter from '@/components/Letter'
-import Slideshow from '@/components/Slideshow'
 import VideoMemory from '@/components/VideoMemory'
 import Minigame from '@/components/Minigame'
 
-const STEPS = ['special', 'letter', 'video', 'memories', 'prizebox', 'game', 'closing'] as const
+const STEPS = ['special', 'letter', 'video', 'prizebox', 'game', 'closing'] as const
 type Step = (typeof STEPS)[number]
 
 export default function Experience() {
   const [step, setStep] = useState<Step>('special')
   const [playing, setPlaying] = useState(false)
+  /** Covers the switch out of the dark room so the next page is not a hard cut. */
+  const [veiled, setVeiled] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
+  /** Whether the song is meant to be on, regardless of what the browser allows. */
+  const wantsSong = useRef(false)
+
+  // A browser can refuse to resume audio outside a gesture, so her next tap
+  // anywhere quietly puts the song back on.
+  useEffect(() => {
+    const retry = () => {
+      const el = audioRef.current
+      if (!wantsSong.current || !el || !el.paused) return
+      el.play()
+        .then(() => setPlaying(true))
+        .catch(() => {})
+    }
+    document.addEventListener('pointerdown', retry)
+    return () => document.removeEventListener('pointerdown', retry)
+  }, [])
 
   function next() {
     setStep((s) => STEPS[Math.min(STEPS.indexOf(s) + 1, STEPS.length - 1)])
@@ -31,6 +48,7 @@ export default function Experience() {
   }
 
   function resumeAudio() {
+    wantsSong.current = true
     audioRef.current
       ?.play()
       .then(() => setPlaying(true))
@@ -41,11 +59,14 @@ export default function Experience() {
     const el = audioRef.current
     if (!el) return
     if (el.paused) {
+      wantsSong.current = true
       // The browser may refuse before a user gesture; ignore it, the button stays available.
       el.play()
         .then(() => setPlaying(true))
         .catch(() => setPlaying(false))
     } else {
+      // Turning it off by hand means it stays off until she says otherwise.
+      wantsSong.current = false
       el.pause()
       setPlaying(false)
     }
@@ -57,6 +78,10 @@ export default function Experience() {
       <div className="grain" aria-hidden />
       <Petals />
       <audio ref={audioRef} src={content.audioSrc} loop preload="none" />
+
+      {veiled && (
+        <div className="page-veil" aria-hidden onAnimationEnd={() => setVeiled(false)} />
+      )}
 
       <button onClick={toggleAudio} className="audio-toggle label" title={content.audioTitle}>
         {playing ? content.ui.soundOn : content.ui.soundOff}
@@ -90,21 +115,16 @@ export default function Experience() {
         </section>
       )}
 
-      {step === 'memories' && (
-        <section className="sheet sheet--album">
-          <h2 className="hand-lg text-[2.6rem]">{content.memoriesTitle}</h2>
-          <Slideshow slides={content.slides} onDone={next} />
-        </section>
-      )}
-
       {step === 'video' && (
-        <section className="sheet sheet--album">
-          <VideoMemory
-            onDone={next}
-            onPlay={pauseAudio}
-            onEnded={resumeAudio}
-          />
-        </section>
+        <VideoMemory
+          onDone={() => {
+            // The room is already black here, so the veil takes over without a seam.
+            setVeiled(true)
+            next()
+          }}
+          hushSong={pauseAudio}
+          resumeSong={resumeAudio}
+        />
       )}
 
       {step === 'prizebox' && (

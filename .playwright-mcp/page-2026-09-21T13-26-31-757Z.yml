@@ -1,0 +1,10 @@
+- generic [active] [ref=f27e1]:
+  - main [ref=f27e2]:
+    - button "sound off" [ref=f27e3]
+    - generic [ref=f27e4]:
+      - paragraph [ref=f27e30]: 27 September 2026
+      - heading "Your Special Day" [level=1] [ref=f27e31]
+      - paragraph [ref=f27e32]: Take your time with this one.
+      - button "Open the letter" [ref=f27e42]
+  - button "Open Next.js Dev Tools" [ref=f27e48] [cursor=pointer]
+  - alert [ref=f27e52]

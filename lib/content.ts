@@ -7,8 +7,6 @@
  */
 export const unlockAt = new Date('2026-09-27T00:00:00+07:00')
 
-export type Slide = { photo: string; caption: string }
-export type Photo = { src: string; caption?: string }
 export type Paper = { text: string; isPrize: boolean }
 
 export const content = {
@@ -35,8 +33,6 @@ export const content = {
     cta: 'Open the letter',
   },
 
-  memoriesTitle: 'Our Memories',
-
   /**
    * The letter. One string = one paragraph.
    * Write specific moments, not general compliments — that's what makes it read honest.
@@ -51,24 +47,15 @@ export const content = {
     'Happy birthday. I love you.',
   ],
 
-  // --- Slideshow: photo + caption, one at a time ---
-  // Put the files in public/photos/
-  slides: [
-    { photo: '/photos/01.jpg', caption: '[when, where, why this photo]' },
-    { photo: '/photos/02.jpg', caption: '[the story behind this one]' },
-    { photo: '/photos/03.jpg', caption: '[the story behind this one]' },
-  ] satisfies Slide[],
-
-  // --- The video: its own screen, right after the photos ---
+  // --- The video: its own screen, right after the letter ---
   // Put the file at public/videos/our-memories.mp4 (keep it under 25 MB — that is
   // the per-file limit on Cloudflare, so compress it if your phone's clip is bigger).
   video: {
     src: '/videos/our-memories.mp4',
     title: 'One more thing',
-    confirm: 'Are you sure you want to play this?',
-    yes: 'Play it',
-    no: 'Not yet',
-    tease: 'you have to watch it, hehe',
+    blocked: 'Tap to start it.',
+    rotate: 'Turn your phone sideways first — this one is widescreen.',
+    yes: 'Play',
     after: 'Sorry if the edit is bad. I tried.',
     cta: 'Continue',
     missing: 'video not added yet',
@@ -117,13 +104,11 @@ export const content = {
   // --- Button and control labels ---
   ui: {
     next: 'Next',
-    prev: 'Previous',
     continue: 'Continue',
     skip: 'skip',
     toGame: 'One last little game',
     soundOn: 'sound on',
     soundOff: 'sound off',
-    photoMissing: 'photo not added yet',
     paper: 'Paper',
     shuffling: 'shuffling...',
   },
