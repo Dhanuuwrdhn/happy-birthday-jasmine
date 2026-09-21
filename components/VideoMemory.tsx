@@ -78,11 +78,9 @@ export default function VideoMemory({ onDone, onPlay, onEnded }: VideoMemoryProp
         </div>
       </div>
 
-      {stage === 'playing' ? (
-        <button onClick={finish} className="btn-ghost">
-          {content.ui.skip}
-        </button>
-      ) : (
+      {/* No way past this screen until the clip has actually finished — the one
+          exception is a missing file, which must not trap her. */}
+      {(stage === 'done' || missing) && (
         <button onClick={onDone} className="btn">
           {content.video.cta}
         </button>
