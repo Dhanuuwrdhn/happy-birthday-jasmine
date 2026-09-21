@@ -497,24 +497,40 @@ body {
   color: var(--rose);
 }
 
-/* The slips being swept around after each pick. They are identical face down,
-   so a quick sweep sells the shuffle without moving anything for real. */
-.is-shuffling .paper {
-  animation: sweep 0.7s ease-in-out;
+/* The shuffle: the slips lift off the paper, cross over each other and land
+   again. They are identical face down, so nothing has to move for real —
+   the depth is what sells it. */
+.paper-deck {
+  perspective: 900px;
+  perspective-origin: 50% 40%;
 }
 
-@keyframes sweep {
+.paper-deck .paper {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.is-shuffling .paper {
+  animation: shuffle-card 1s cubic-bezier(0.45, 0.05, 0.3, 1) both;
+  animation-delay: calc(var(--slot) * 70ms);
+  z-index: calc(4 - var(--slot));
+}
+
+@keyframes shuffle-card {
   0% {
-    transform: translateX(0) rotate(0deg);
+    transform: translate3d(0, 0, 0) rotateY(0deg) rotateZ(0deg);
   }
-  30% {
-    transform: translateX(15px) rotate(7deg);
+  28% {
+    transform: translate3d(calc(var(--dir) * 18px), -34px, 90px) rotateY(24deg) rotateZ(calc(var(--dir) * 6deg));
   }
-  65% {
-    transform: translateX(-15px) rotate(-7deg);
+  58% {
+    transform: translate3d(calc(var(--dir) * -46px), -18px, 60px) rotateY(180deg) rotateZ(calc(var(--dir) * -8deg));
+  }
+  82% {
+    transform: translate3d(calc(var(--dir) * 10px), -6px, 20px) rotateY(330deg) rotateZ(0deg);
   }
   100% {
-    transform: translateX(0) rotate(0deg);
+    transform: translate3d(0, 0, 0) rotateY(360deg) rotateZ(0deg);
   }
 }
 
@@ -1193,24 +1209,40 @@ body {
   color: var(--rose);
 }
 
-/* The slips being swept around after each pick. They are identical face down,
-   so a quick sweep sells the shuffle without moving anything for real. */
-.is-shuffling .paper {
-  animation: sweep 0.7s ease-in-out;
+/* The shuffle: the slips lift off the paper, cross over each other and land
+   again. They are identical face down, so nothing has to move for real —
+   the depth is what sells it. */
+.paper-deck {
+  perspective: 900px;
+  perspective-origin: 50% 40%;
 }
 
-@keyframes sweep {
+.paper-deck .paper {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.is-shuffling .paper {
+  animation: shuffle-card 1s cubic-bezier(0.45, 0.05, 0.3, 1) both;
+  animation-delay: calc(var(--slot) * 70ms);
+  z-index: calc(4 - var(--slot));
+}
+
+@keyframes shuffle-card {
   0% {
-    transform: translateX(0) rotate(0deg);
+    transform: translate3d(0, 0, 0) rotateY(0deg) rotateZ(0deg);
   }
-  30% {
-    transform: translateX(15px) rotate(7deg);
+  28% {
+    transform: translate3d(calc(var(--dir) * 18px), -34px, 90px) rotateY(24deg) rotateZ(calc(var(--dir) * 6deg));
   }
-  65% {
-    transform: translateX(-15px) rotate(-7deg);
+  58% {
+    transform: translate3d(calc(var(--dir) * -46px), -18px, 60px) rotateY(180deg) rotateZ(calc(var(--dir) * -8deg));
+  }
+  82% {
+    transform: translate3d(calc(var(--dir) * 10px), -6px, 20px) rotateY(330deg) rotateZ(0deg);
   }
   100% {
-    transform: translateX(0) rotate(0deg);
+    transform: translate3d(0, 0, 0) rotateY(360deg) rotateZ(0deg);
   }
 }
 
@@ -1793,24 +1825,40 @@ body {
   color: var(--rose);
 }
 
-/* The slips being swept around after each pick. They are identical face down,
-   so a quick sweep sells the shuffle without moving anything for real. */
-.is-shuffling .paper {
-  animation: sweep 0.7s ease-in-out;
+/* The shuffle: the slips lift off the paper, cross over each other and land
+   again. They are identical face down, so nothing has to move for real —
+   the depth is what sells it. */
+.paper-deck {
+  perspective: 900px;
+  perspective-origin: 50% 40%;
 }
 
-@keyframes sweep {
+.paper-deck .paper {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.is-shuffling .paper {
+  animation: shuffle-card 1s cubic-bezier(0.45, 0.05, 0.3, 1) both;
+  animation-delay: calc(var(--slot) * 70ms);
+  z-index: calc(4 - var(--slot));
+}
+
+@keyframes shuffle-card {
   0% {
-    transform: translateX(0) rotate(0deg);
+    transform: translate3d(0, 0, 0) rotateY(0deg) rotateZ(0deg);
   }
-  30% {
-    transform: translateX(15px) rotate(7deg);
+  28% {
+    transform: translate3d(calc(var(--dir) * 18px), -34px, 90px) rotateY(24deg) rotateZ(calc(var(--dir) * 6deg));
   }
-  65% {
-    transform: translateX(-15px) rotate(-7deg);
+  58% {
+    transform: translate3d(calc(var(--dir) * -46px), -18px, 60px) rotateY(180deg) rotateZ(calc(var(--dir) * -8deg));
+  }
+  82% {
+    transform: translate3d(calc(var(--dir) * 10px), -6px, 20px) rotateY(330deg) rotateZ(0deg);
   }
   100% {
-    transform: translateX(0) rotate(0deg);
+    transform: translate3d(0, 0, 0) rotateY(360deg) rotateZ(0deg);
   }
 }
 
@@ -2416,24 +2464,40 @@ body {
   color: var(--rose);
 }
 
-/* The slips being swept around after each pick. They are identical face down,
-   so a quick sweep sells the shuffle without moving anything for real. */
-.is-shuffling .paper {
-  animation: sweep 0.7s ease-in-out;
+/* The shuffle: the slips lift off the paper, cross over each other and land
+   again. They are identical face down, so nothing has to move for real —
+   the depth is what sells it. */
+.paper-deck {
+  perspective: 900px;
+  perspective-origin: 50% 40%;
 }
 
-@keyframes sweep {
+.paper-deck .paper {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.is-shuffling .paper {
+  animation: shuffle-card 1s cubic-bezier(0.45, 0.05, 0.3, 1) both;
+  animation-delay: calc(var(--slot) * 70ms);
+  z-index: calc(4 - var(--slot));
+}
+
+@keyframes shuffle-card {
   0% {
-    transform: translateX(0) rotate(0deg);
+    transform: translate3d(0, 0, 0) rotateY(0deg) rotateZ(0deg);
   }
-  30% {
-    transform: translateX(15px) rotate(7deg);
+  28% {
+    transform: translate3d(calc(var(--dir) * 18px), -34px, 90px) rotateY(24deg) rotateZ(calc(var(--dir) * 6deg));
   }
-  65% {
-    transform: translateX(-15px) rotate(-7deg);
+  58% {
+    transform: translate3d(calc(var(--dir) * -46px), -18px, 60px) rotateY(180deg) rotateZ(calc(var(--dir) * -8deg));
+  }
+  82% {
+    transform: translate3d(calc(var(--dir) * 10px), -6px, 20px) rotateY(330deg) rotateZ(0deg);
   }
   100% {
-    transform: translateX(0) rotate(0deg);
+    transform: translate3d(0, 0, 0) rotateY(360deg) rotateZ(0deg);
   }
 }
 

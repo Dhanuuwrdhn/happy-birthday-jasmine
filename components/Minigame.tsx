@@ -1,12 +1,13 @@
 'use client'
 
 import { useState } from 'react'
+import type React from 'react'
 import { content } from '@/lib/content'
 import { nextOutcome, teaseTarget } from '@/lib/logic'
 import { JasmineMark } from '@/components/Jasmine'
 
 const REVEAL_MS = 1400
-const SHUFFLE_MS = 700
+const SHUFFLE_MS = 1050
 
 /**
  * Four face-down papers that get shuffled again after every pick.
@@ -55,7 +56,7 @@ export default function Minigame({ onDone }: { onDone: () => void }) {
     <div className="stack">
       <p className="title text-center text-2xl">{content.prizeIntro}</p>
 
-      <div className={`grid w-full grid-cols-2 gap-4 sm:grid-cols-4 ${shuffling ? 'is-shuffling' : ''}`}>
+      <div className={`paper-deck grid w-full grid-cols-2 gap-4 sm:grid-cols-4 ${shuffling ? 'is-shuffling' : ''}`}>
         {[0, 1, 2, 3].map((i) => (
           <button
             key={i}
@@ -63,6 +64,8 @@ export default function Minigame({ onDone }: { onDone: () => void }) {
             disabled={busy || done}
             aria-label={`${content.ui.paper} ${i + 1}`}
             className="paper"
+            // Each slip takes its own path through the shuffle.
+            style={{ '--slot': i, '--dir': i % 2 ? 1 : -1 } as React.CSSProperties}
           >
             {picked === i && reveal ? (
               <span className={reveal.isPrize ? 'paper-prize' : 'muted'}>{reveal.text}</span>
