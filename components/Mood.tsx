@@ -2,13 +2,17 @@
 
 import { useState } from 'react'
 import { content } from '@/lib/content'
+import { JasmineSprig, JasmineMark } from '@/components/Jasmine'
 
-/** Where a button runs off to, cycled each time she reaches for it. */
+/**
+ * Where a button runs off to. The offsets stay small enough that it never
+ * leaves the paper — it should look playful, not broken.
+ */
 const DODGE = [
-  'translate(-120px, -30px)',
-  'translate(130px, 40px)',
-  'translate(-90px, 55px)',
-  'translate(110px, -50px)',
+  { x: -78, y: -18 },
+  { x: 84, y: 22 },
+  { x: -62, y: 26 },
+  { x: 70, y: -24 },
 ]
 
 /** How many times "Yes" escapes before it lets itself be pressed. */
@@ -35,7 +39,11 @@ export default function Mood({ onDone }: { onDone: () => void }) {
   const [noRuns, setNoRuns] = useState(0)
 
   const yesSettled = yesRuns >= YES_DODGES
-  const spot = (runs: number) => (runs === 0 ? undefined : { transform: DODGE[(runs - 1) % DODGE.length] })
+  const spot = (runs: number) => {
+    if (runs === 0) return undefined
+    const { x, y } = DODGE[(runs - 1) % DODGE.length]
+    return { transform: `translate(${x}px, ${y}px)` }
+  }
 
   function reachForYes() {
     if (!yesSettled) setYesRuns((n) => n + 1)
@@ -43,30 +51,44 @@ export default function Mood({ onDone }: { onDone: () => void }) {
 
   if (!asked) {
     return (
-      <section className="sheet text-center">
-        <h2 className="hand-lg text-[2.4rem]">{content.mood.question}</h2>
+      <section className="sheet sheet--note text-center">
+        <JasmineSprig />
+        <h2 className="hand-lg text-[2.3rem]">{content.mood.question}</h2>
+        <p className="muted max-w-[16rem]">{content.mood.sub}</p>
 
         <div className="mood-faces">
-          <button onClick={() => setAsked(true)} className="mood-face" aria-label={content.mood.happy}>
-            <Face mood="happy" />
+          <button onClick={() => setAsked(true)} className="mood-pick">
+            <span className="mood-face">
+              <Face mood="happy" />
+            </span>
+            <span className="hand">{content.mood.happy}</span>
           </button>
+
           {/* It spins away from her the moment she reaches for it. */}
-          <span className="mood-face mood-face--sad" role="presentation">
-            <Face mood="sad" />
+          <span className="mood-pick mood-pick--sad" role="presentation">
+            <span className="mood-face">
+              <Face mood="sad" />
+            </span>
+            <span className="hand">{content.mood.sad}</span>
           </span>
         </div>
 
+        <div className="rule" aria-hidden>
+          <JasmineMark />
+        </div>
         <p className="hand">{content.mood.hint}</p>
       </section>
     )
   }
 
   return (
-    <section className="sheet text-center">
-      <h2 className="hand-lg text-[2.2rem]">{content.mood.confirm}</h2>
+    <section className="sheet sheet--note text-center">
+      <JasmineSprig />
+      <h2 className="hand-lg text-[2.1rem]">{content.mood.confirm}</h2>
+      <p className="muted max-w-[16rem]">{content.mood.confirmSub}</p>
 
-      <div className="mood-answers">
-        {/* "Yes" escapes twice for the fun of it, then stands still. */}
+      {/* The buttons only ever run around inside this patch of paper. */}
+      <div className="mood-yard">
         <button
           onPointerEnter={reachForYes}
           onMouseEnter={reachForYes}
@@ -91,8 +113,9 @@ export default function Mood({ onDone }: { onDone: () => void }) {
         </button>
       </div>
 
-      {noRuns > 0 && <p className="hand">{content.mood.tease}</p>}
-      {yesRuns > 0 && !yesSettled && <p className="hand">{content.mood.chase}</p>}
+      <p className="hand mood-whisper">
+        {noRuns > 0 ? content.mood.tease : yesSettled ? content.mood.caught : content.mood.chase}
+      </p>
     </section>
   )
 }

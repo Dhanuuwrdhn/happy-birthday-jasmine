@@ -98,13 +98,16 @@ export const content = {
   // --- One last question before the goodbye ---
   mood: {
     question: 'How are you feeling today?',
-    happy: 'Happy',
-    sad: 'Gloomy',
-    hint: 'pick one, honestly',
+    sub: 'Only one of these is allowed on your birthday.',
+    happy: 'happy',
+    sad: 'gloomy',
+    hint: 'go on, pick',
     confirm: "Are you sure you're happy?",
+    confirmSub: 'I want to hear it properly.',
     yes: 'Yes',
     no: 'No',
     chase: 'catch it first, hehe',
+    caught: 'alright, I believe you',
     tease: 'that one is not for you',
   },
 
