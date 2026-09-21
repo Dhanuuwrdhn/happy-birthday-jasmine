@@ -5,6 +5,7 @@ import { content } from '@/lib/content'
 import GiftBox from '@/components/GiftBox'
 import { JasmineSprig, JasmineMark } from '@/components/Jasmine'
 import Petals from '@/components/Petals'
+import Garden from '@/components/Garden'
 import Letter from '@/components/Letter'
 import VideoMemory from '@/components/VideoMemory'
 import Minigame from '@/components/Minigame'
@@ -53,6 +54,7 @@ export default function Experience() {
     <main className="page">
       <div className="aurora" aria-hidden />
       <div className="grain" aria-hidden />
+      <Garden />
       <Petals />
       <audio ref={audioRef} src={content.audioSrc} loop preload="none" />
 
