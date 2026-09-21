@@ -5,9 +5,10 @@ import { content, unlockAt } from '@/lib/content'
 import { isUnlocked, remaining } from '@/lib/logic'
 import Envelope from '@/components/Envelope'
 import Petals from '@/components/Petals'
+import Garden from '@/components/Garden'
 import { JasmineMark } from '@/components/Jasmine'
 
-/** Specks of dust caught in the light, placed by hand so they sit evenly. */
+/** Gold specks catching the light, placed by hand so they sit evenly. */
 const MOTES = [
   { left: '18%', top: '28%', delay: '0s' },
   { left: '76%', top: '22%', delay: '2.1s' },
@@ -44,15 +45,16 @@ export default function Gate({ children }: { children: React.ReactNode }) {
   const left = remaining(now, unlockAt)
 
   return (
-    <main className="page page--night">
-      <div className="nightfall" aria-hidden />
+    <main className="page">
+      <div className="aurora" aria-hidden />
       <div className="grain" aria-hidden />
+      <Garden />
       <Petals />
       {MOTES.map((m, i) => (
         <span key={i} className="mote" style={{ left: m.left, top: m.top, animationDelay: m.delay }} aria-hidden />
       ))}
 
-      <section className="sheet sheet--lit">
+      <section className="sheet">
         <Envelope />
         <p className="dateline">{content.dateline}</p>
         <h1 className="hand-lg text-balance text-center text-[2.8rem] sm:text-[3.4rem]">

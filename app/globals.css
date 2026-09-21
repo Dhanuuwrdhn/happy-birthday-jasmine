@@ -1243,48 +1243,75 @@ body {
 
 /* Respect the "reduce motion" setting on phones and laptops. */
 
-/* ---------- The night before ---------- */
-/* The gate is the only dark screen: the letter is lying in an unlit room with
-   one warm light on it. Everything after it opens into daylight, so the unlock
-   reads like morning arriving. */
+/* ---------- The garden around the letter ---------- */
+/* Without these the card floats in an empty field; jasmine grows in from the
+   corners and a few soft lights sit behind it. */
 
-.page--night {
-  background: #130b11;
-}
-
-.nightfall {
+.bokeh {
   position: fixed;
-  inset: 0;
+  border-radius: 999px;
   pointer-events: none;
-  background:
-    radial-gradient(44% 38% at 50% 32%, rgba(255, 206, 168, 0.3), transparent 72%),
-    radial-gradient(70% 60% at 50% 40%, rgba(94, 40, 58, 0.55), transparent 78%),
-    radial-gradient(circle at 50% 42%, transparent 26%, rgba(6, 3, 6, 0.92) 100%);
-  animation: candle 7s ease-in-out infinite;
+  background: radial-gradient(circle, rgba(255, 226, 205, 0.5), rgba(233, 170, 184, 0.16) 55%, transparent 72%);
+  filter: blur(6px);
+  animation: bokeh-breathe 9s ease-in-out infinite;
 }
 
-/* The light is a flame, so it never sits perfectly still. */
-@keyframes candle {
+@keyframes bokeh-breathe {
   0%,
   100% {
-    opacity: 1;
+    opacity: 0.55;
+    transform: scale(1);
   }
-  45% {
-    opacity: 0.93;
-  }
-  70% {
-    opacity: 0.97;
+  50% {
+    opacity: 0.9;
+    transform: scale(1.12);
   }
 }
 
-/* Dust drifting through the beam. */
+.vine {
+  position: fixed;
+  width: 22rem;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.vine .sprig {
+  width: 100%;
+  color: var(--rose);
+}
+
+.vine--tl {
+  top: -3.5rem;
+  left: -5rem;
+  transform: rotate(28deg);
+}
+
+.vine--tr {
+  top: -3rem;
+  right: -5rem;
+  transform: rotate(-28deg) scaleX(-1);
+}
+
+.vine--bl {
+  bottom: -3.5rem;
+  left: -4.5rem;
+  transform: rotate(-20deg);
+}
+
+.vine--br {
+  bottom: -3rem;
+  right: -4.5rem;
+  transform: rotate(20deg) scaleX(-1);
+}
+
+/* Gold specks drifting through the light. */
 .mote {
   position: fixed;
-  width: 3px;
-  height: 3px;
+  width: 4px;
+  height: 4px;
   border-radius: 999px;
-  background: rgba(255, 224, 196, 0.9);
-  box-shadow: 0 0 8px 2px rgba(255, 206, 168, 0.55);
+  background: rgba(212, 162, 96, 0.95);
+  box-shadow: 0 0 9px 2px rgba(212, 162, 96, 0.45);
   pointer-events: none;
   animation: drift-up 11s ease-in-out infinite;
 }
@@ -1296,7 +1323,7 @@ body {
   }
   25%,
   65% {
-    opacity: 0.85;
+    opacity: 0.9;
   }
   100% {
     opacity: 0;
@@ -1304,35 +1331,19 @@ body {
   }
 }
 
-/* In the dark the petals are only rimmed by the light. */
-.page--night .petal {
-  background: linear-gradient(140deg, rgba(232, 179, 189, 0.5), rgba(120, 44, 64, 0.65));
-  box-shadow: 0 0 10px rgba(255, 196, 176, 0.18);
+/* The closest petals are bigger and slightly out of focus. */
+.petal--near {
+  filter: blur(1.5px);
+  opacity: 0.9;
 }
 
-/* The lit sheet: bright where the light lands, falling into shadow at the
-   corners, with a warm halo spilling onto the table around it. */
-.sheet--lit {
-  background: linear-gradient(168deg, #fdf8f1 0%, #f3e6d5 62%, #e4cdb9 100%);
-  box-shadow:
-    0 2px 3px rgba(0, 0, 0, 0.5),
-    0 26px 70px rgba(0, 0, 0, 0.65),
-    0 0 90px 12px rgba(255, 190, 150, 0.16);
-}
+@media (max-width: 640px) {
+  .vine {
+    width: 14rem;
+    opacity: 0.32;
+  }
 
-.sheet--lit::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(70% 55% at 50% 26%, transparent 40%, rgba(58, 26, 34, 0.26) 100%);
-}
-
-/* The wax seal is the one thing in the room that glows. */
-.page--night .envelope {
-  filter: drop-shadow(0 0 14px rgba(214, 152, 92, 0.55));
-}
-
-.page--night .dateline {
-  color: #b97f45;
+  .bokeh {
+    filter: blur(10px);
+  }
 }
