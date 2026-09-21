@@ -123,8 +123,6 @@ export const content = {
     continue: 'Continue',
     skip: 'skip',
     toGame: 'One last little game',
-    soundOn: 'sound on',
-    soundOff: 'sound off',
     paper: 'Paper',
     shuffling: 'shuffling...',
   },

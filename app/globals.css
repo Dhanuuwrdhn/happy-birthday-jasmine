@@ -3,6 +3,7 @@
 /* The whole site is one paper letter set: envelope, folded note, ruled sheet,
    album page, folded slips. Colours come from aged paper, plum ink and sealing
    wax — not from a UI palette. */
+
 :root {
   --surface: #ddc2bd;
   --surface-deep: #c9a5a2;
@@ -33,6 +34,7 @@ body {
 
 /* One full screen, contents centred. Taller contents (a long letter) grow the
    page rather than being clipped. */
+
 .page {
   position: relative;
   display: grid;
@@ -45,6 +47,7 @@ body {
 
 /* The surface the paper lies on: light falling from the upper left, corners
    falling away. Static — the paper should look still, not swimming. */
+
 .aurora {
   position: fixed;
   inset: 0;
@@ -56,6 +59,7 @@ body {
 }
 
 /* Linen weave in the surface, so the backdrop reads as cloth under the paper. */
+
 .grain {
   position: fixed;
   inset: 0;
@@ -66,6 +70,7 @@ body {
 }
 
 /* Petals drifting past. The only ambient motion on the page. */
+
 .petal {
   position: fixed;
   top: -6%;
@@ -99,10 +104,9 @@ body {
   }
 }
 
-/* ---------- Paper ---------- */
-
 /* A sheet of paper set down on the surface: square corners, a tight contact
    shadow under the edge and a soft one further out. */
+
 .sheet {
   position: relative;
   display: flex;
@@ -125,6 +129,7 @@ body {
 
 /* The note that was folded inside the envelope: a crease across the middle,
    with the paper catching light differently above and below it. */
+
 .sheet--note {
   width: min(100%, 24rem);
   padding: 3.5rem 2.5rem 3rem;
@@ -147,6 +152,7 @@ body {
 }
 
 /* Letter paper: faint ruled lines, the way a writing pad is printed. */
+
 .sheet--ruled {
   background-color: var(--paper);
   background-image: repeating-linear-gradient(
@@ -158,6 +164,7 @@ body {
 }
 
 /* Album page: a warmer, heavier stock for the photographs to sit on. */
+
 .sheet--album {
   background: linear-gradient(172deg, var(--paper-album), #eddfcf);
   transform: rotate(0.3deg);
@@ -174,6 +181,7 @@ body {
 }
 
 /* Contents of a sheet space themselves; a .stack inside just fills the width. */
+
 .sheet .stack {
   gap: 1.5rem;
   max-width: none;
@@ -189,6 +197,7 @@ body {
 
 /* Your handwriting. Used for anything a person would have written by hand:
    greetings, the hints, the signature. */
+
 .hand {
   font-family: var(--font-hand), cursive;
   font-weight: 400;
@@ -209,6 +218,7 @@ body {
 }
 
 /* The date, set the way it would be printed at the head of a letter. */
+
 .dateline {
   font-size: 0.95rem;
   font-weight: 500;
@@ -218,6 +228,7 @@ body {
 
 /* The jasmine sprig: drawn once, used large above a heading and small as the
    divider between sections. It is her name, so it earns its place. */
+
 .sprig {
   width: 11rem;
   height: auto;
@@ -232,6 +243,7 @@ body {
 }
 
 /* A hairline broken in the middle by the jasmine mark. */
+
 .rule {
   display: flex;
   align-items: center;
@@ -249,6 +261,7 @@ body {
 }
 
 /* The line at the very end, set small: it signs the work without interrupting it. */
+
 .credit {
   margin-top: 0.5rem;
   font-size: 0.85rem;
@@ -301,19 +314,6 @@ body {
   opacity: 0.35;
 }
 
-.audio-toggle {
-  position: fixed;
-  top: 1.1rem;
-  right: 1.1rem;
-  z-index: 10;
-  padding: 0.35rem 0.9rem;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 999px;
-  background: rgba(252, 247, 240, 0.7);
-  font-family: var(--font-hand), cursive;
-  font-size: 1.05rem;
-  color: var(--ink-soft);
-}
 
 /* ---------- The letter ---------- */
 
@@ -420,6 +420,7 @@ body {
 }
 
 /* The gloomy one refuses to be picked: it spins on the spot when approached. */
+
 .mood-pick--sad {
   color: var(--ink-soft);
   cursor: not-allowed;
@@ -450,6 +451,7 @@ body {
 }
 
 /* The patch of paper the two answers are allowed to run around in. */
+
 .mood-yard {
   position: relative;
   display: flex;
@@ -465,13 +467,13 @@ body {
 }
 
 /* Held at a fixed height so the card does not jump as the line changes. */
+
 .mood-whisper {
   min-height: 1.6rem;
 }
 
-/* ---------- The game ---------- */
-
 /* Folded slips of paper, each with a crease down its middle. */
+
 .paper {
   position: relative;
   display: grid;
@@ -521,6 +523,7 @@ body {
 /* The shuffle: the slips lift off the paper, cross over each other and land
    again. They are identical face down, so nothing has to move for real —
    the depth is what sells it. */
+
 .paper-deck {
   perspective: 900px;
   perspective-origin: 50% 40%;
@@ -562,9 +565,8 @@ body {
   width: 100%;
 }
 
-/* ---------- The gift box ---------- */
-
 /* The box needs room around it, or it floats alone in an empty field. */
+
 .gift-stage {
   position: relative;
   display: grid;
@@ -574,6 +576,7 @@ body {
 }
 
 /* Warm light pooling around the box, as if the room were lit by it. */
+
 .gift-halo {
   position: absolute;
   width: 20rem;
@@ -618,6 +621,7 @@ body {
 }
 
 /* Ribbon: one band down the box, one across it. */
+
 .gift-band,
 .gift-band::after {
   position: absolute;
@@ -659,6 +663,7 @@ body {
 }
 
 /* The bow: two loops and a knot. */
+
 .gift-bow,
 .gift-bow::before,
 .gift-bow::after {
@@ -752,8 +757,8 @@ body {
   }
 }
 
-/* ---------- Small screens (phones) ---------- */
 /* She will most likely open this on a phone, so this is the everyday case. */
+
 @media (max-width: 640px) {
   .page {
     padding: 2rem 1rem;
@@ -842,10 +847,6 @@ body {
     transform: translateX(-50%) translate(28px, -90px) rotate(26deg);
   }
 
-  .audio-toggle {
-    top: 0.75rem;
-    right: 0.75rem;
-  }
 
   .cinema-title {
     top: 1rem;
@@ -862,6 +863,7 @@ body {
 }
 
 /* Respect the "reduce motion" setting on phones and laptops. */
+
 @media (prefers-reduced-motion: reduce) {
   .petal,
   .paper,
@@ -876,9 +878,8 @@ body {
   }
 }
 
-/* ---------- The video ---------- */
-
 /* The clip takes over the whole window: a dark room, nothing else in it. */
+
 .cinema-room {
   position: fixed;
   inset: 0;
@@ -914,6 +915,7 @@ body {
 }
 
 /* The source video feeds the 3D screen, so it is never shown directly. */
+
 .cinema-source {
   position: absolute;
   width: 1px;
@@ -923,6 +925,7 @@ body {
 }
 
 /* Fallback when WebGL is unavailable: just play the clip. */
+
 .cinema-flat {
   width: 100%;
   height: 100%;
@@ -946,6 +949,7 @@ body {
 
 /* Carries the black from the end of the film into the next page, so there is
    no hard cut between the dark room and the paper. */
+
 .page-veil {
   position: fixed;
   inset: 0;
@@ -966,6 +970,7 @@ body {
 }
 
 /* Walking in: black at first, then the room comes up out of it. */
+
 .cinema-enter {
   position: absolute;
   inset: 0;
@@ -985,10 +990,6 @@ body {
   }
 }
 
-.cinema-room {
-  animation: settle-in 1.8s ease forwards;
-}
-
 @keyframes settle-in {
   from {
     transform: scale(1.05);
@@ -1000,6 +1001,7 @@ body {
 
 /* The room darkens itself once the clip is over, then hands over to the next
    page without asking her for anything. */
+
 .cinema-blackout {
   position: absolute;
   inset: 0;
@@ -1044,6 +1046,7 @@ body {
 }
 
 /* A phone tipping onto its side, drawn with one element. */
+
 .cinema-rotate {
   width: 34px;
   height: 56px;
@@ -1067,6 +1070,7 @@ body {
 }
 
 /* The ghost button needs to read against the dark room, not the paper. */
+
 .btn-ghost--dark {
   border-color: rgba(244, 236, 230, 0.35);
   color: rgba(244, 236, 230, 0.8);
@@ -1077,75 +1081,14 @@ body {
   color: #eec3ce;
 }
 
-/* ---------- Countdown ---------- */
-
-.counter {
-  display: flex;
-  width: 100%;
-  padding: 1.1rem 0;
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-}
-
-.counter-cell {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.counter-cell + .counter-cell {
-  border-left: 1px solid var(--rule);
-}
-
-.counter-num {
-  font-size: 2.6rem;
-  font-weight: 300;
-  line-height: 1;
-  color: var(--ink);
-}
-
-.counter-label {
-  font-family: var(--font-hand), cursive;
-  font-size: 1rem;
-  color: var(--ink-soft);
-}
-
-.envelope {
-  width: 104px;
-  color: var(--rose);
-}
-
 /* ---------- How she is feeling ---------- */
-
-.mood-faces {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2.5rem;
-}
-
-.mood-face {
-  display: block;
-  width: 5.5rem;
-  color: var(--rose);
-  background: transparent;
-  border: 0;
-  transition: transform 0.3s ease;
-}
-
-.mood-face svg {
-  width: 100%;
-  height: auto;
-  filter: drop-shadow(0 8px 16px rgba(107, 66, 72, 0.22));
-}
 
 .mood-face:hover {
   transform: translateY(-6px) scale(1.06);
 }
 
 /* The gloomy one refuses to be picked: it spins on the spot when approached. */
+
 .mood-face--sad {
   color: var(--ink-soft);
   cursor: not-allowed;
@@ -1153,18 +1096,6 @@ body {
 
 .mood-face--sad:hover {
   animation: spin-off 1.1s linear infinite;
-}
-
-@keyframes spin-off {
-  0% {
-    transform: rotate(0deg) scale(1);
-  }
-  50% {
-    transform: rotate(180deg) scale(0.88);
-  }
-  100% {
-    transform: rotate(360deg) scale(1);
-  }
 }
 
 .mood-answers {
@@ -1176,422 +1107,9 @@ body {
   flex-wrap: wrap;
 }
 
-/* Both answers walk away from the cursor; only "Yes" eventually gives in. */
-.mood-runner {
-  transition: transform 0.35s cubic-bezier(0.34, 1.3, 0.64, 1);
-}
-
-/* ---------- The game ---------- */
-
-/* Folded slips of paper, each with a crease down its middle. */
-.paper {
-  position: relative;
-  display: grid;
-  place-items: center;
-  min-height: 9rem;
-  padding: 1rem;
-  font-size: 1rem;
-  line-height: 1.45;
-  text-align: center;
-  color: var(--ink);
-  background: linear-gradient(100deg, #fffdfa 0%, #f3e8da 50%, #fffdfa 51%, #f0e3d3 100%);
-  border-radius: 1px;
-  box-shadow:
-    0 1px 2px rgba(107, 66, 72, 0.25),
-    0 8px 18px rgba(107, 66, 72, 0.18);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.paper:nth-child(odd) {
-  transform: rotate(-1.6deg);
-}
-
-.paper:nth-child(even) {
-  transform: rotate(1.6deg);
-}
-
-.paper:hover:not(:disabled) {
-  transform: translateY(-6px) rotate(0deg);
-  box-shadow:
-    0 1px 2px rgba(107, 66, 72, 0.25),
-    0 16px 28px rgba(107, 66, 72, 0.24);
-}
-
-.paper-num {
-  font-size: 2rem;
-  font-weight: 400;
-  color: var(--ink-soft);
-}
-
-.paper-prize {
-  font-family: var(--font-hand), cursive;
-  font-size: 1.3rem;
-  line-height: 1.3;
-  color: var(--rose);
-}
-
-/* The shuffle: the slips lift off the paper, cross over each other and land
-   again. They are identical face down, so nothing has to move for real —
-   the depth is what sells it. */
-.paper-deck {
-  perspective: 900px;
-  perspective-origin: 50% 40%;
-}
-
-.paper-deck .paper {
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-}
-
-.is-shuffling .paper {
-  animation: shuffle-card 1s cubic-bezier(0.45, 0.05, 0.3, 1) both;
-  animation-delay: calc(var(--slot) * 70ms);
-  z-index: calc(4 - var(--slot));
-}
-
-@keyframes shuffle-card {
-  0% {
-    transform: translate3d(0, 0, 0) rotateY(0deg) rotateZ(0deg);
-  }
-  28% {
-    transform: translate3d(calc(var(--dir) * 18px), -34px, 90px) rotateY(24deg) rotateZ(calc(var(--dir) * 6deg));
-  }
-  58% {
-    transform: translate3d(calc(var(--dir) * -46px), -18px, 60px) rotateY(180deg) rotateZ(calc(var(--dir) * -8deg));
-  }
-  82% {
-    transform: translate3d(calc(var(--dir) * 10px), -6px, 20px) rotateY(330deg) rotateZ(0deg);
-  }
-  100% {
-    transform: translate3d(0, 0, 0) rotateY(360deg) rotateZ(0deg);
-  }
-}
-
-.prize-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  width: 100%;
-}
-
-/* ---------- The gift box ---------- */
-
-/* The box needs room around it, or it floats alone in an empty field. */
-.gift-stage {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: min(100%, 22rem);
-  height: 17rem;
-}
-
-/* Warm light pooling around the box, as if the room were lit by it. */
-.gift-halo {
-  position: absolute;
-  width: 20rem;
-  height: 20rem;
-  border-radius: 999px;
-  background: radial-gradient(circle, rgba(255, 244, 228, 0.9), rgba(232, 179, 189, 0.3) 45%, transparent 70%);
-  pointer-events: none;
-}
-
-.gift {
-  position: relative;
-  width: 240px;
-  height: 226px;
-  cursor: pointer;
-  background: transparent;
-  border: 0;
-}
-
-.gift-shadow {
-  position: absolute;
-  left: 50%;
-  bottom: -10px;
-  width: 196px;
-  height: 22px;
-  transform: translateX(-50%);
-  border-radius: 999px;
-  background: radial-gradient(ellipse at center, rgba(107, 66, 72, 0.38), transparent 70%);
-}
-
-.gift-body {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 186px;
-  height: 140px;
-  transform: translateX(-50%);
-  border-radius: 3px;
-  background: linear-gradient(155deg, #d98b9e 0%, #b8536c 55%, #9c3e56 100%);
-  box-shadow:
-    inset 0 2px 0 rgba(255, 255, 255, 0.3),
-    0 14px 30px rgba(107, 66, 72, 0.32);
-}
-
-/* Ribbon: one band down the box, one across it. */
-.gift-band,
-.gift-band::after {
-  position: absolute;
-  background: linear-gradient(180deg, #f2ddb5, var(--gold));
-}
-
-.gift-band {
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 26px;
-  transform: translateX(-50%);
-}
-
-.gift-band::after {
-  content: '';
-  top: 54px;
-  left: -80px;
-  width: 186px;
-  height: 18px;
-  background: linear-gradient(90deg, #e6cb9b, #f2ddb5);
-  opacity: 0.9;
-}
-
-.gift-lid {
-  position: absolute;
-  left: 50%;
-  bottom: 132px;
-  width: 212px;
-  height: 40px;
-  transform: translateX(-50%);
-  border-radius: 3px;
-  background: linear-gradient(155deg, #e09aac, #b8536c);
-  box-shadow:
-    inset 0 2px 0 rgba(255, 255, 255, 0.35),
-    0 8px 18px rgba(107, 66, 72, 0.3);
-  transform-origin: left bottom;
-  transition: transform 0.9s cubic-bezier(0.34, 1.3, 0.64, 1);
-}
-
-/* The bow: two loops and a knot. */
-.gift-bow,
-.gift-bow::before,
-.gift-bow::after {
-  position: absolute;
-  background: linear-gradient(160deg, #f2ddb5, var(--gold));
-}
-
-.gift-bow {
-  top: -18px;
-  left: 50%;
-  width: 22px;
-  height: 20px;
-  transform: translateX(-50%);
-  border-radius: 6px;
-}
-
-.gift-bow::before,
-.gift-bow::after {
-  content: '';
-  top: -2px;
-  width: 40px;
-  height: 26px;
-  border-radius: 60% 40% 55% 45%;
-}
-
-.gift-bow::before {
-  left: -37px;
-  transform: rotate(-16deg);
-}
-
-.gift-bow::after {
-  right: -37px;
-  transform: rotate(16deg) scaleX(-1);
-}
-
-.gift-burst {
-  position: absolute;
-  left: 50%;
-  bottom: 86px;
-  width: 12px;
-  height: 12px;
-  transform: translateX(-50%);
-  border-radius: 999px;
-  background: #fff6e4;
-  opacity: 0;
-  box-shadow: 0 0 46px 20px rgba(242, 221, 181, 0.9);
-}
-
-.gift:hover .gift-lid {
-  transform: translateX(-50%) translateY(-8px);
-}
-
-.gift.is-open {
-  animation: gift-shake 0.45s ease-in-out;
-  pointer-events: none;
-}
-
-.gift.is-open .gift-lid {
-  transform: translateX(-50%) translate(38px, -118px) rotate(26deg);
-}
-
-.gift.is-open .gift-burst {
-  animation: gift-burst 1.1s 0.35s ease-out forwards;
-}
-
-@keyframes gift-shake {
-  0%,
-  100% {
-    transform: translateX(0) rotate(0deg);
-  }
-  25% {
-    transform: translateX(-6px) rotate(-3deg);
-  }
-  75% {
-    transform: translateX(6px) rotate(3deg);
-  }
-}
-
-@keyframes gift-burst {
-  0% {
-    opacity: 0;
-    transform: translateX(-50%) scale(0.4);
-  }
-  45% {
-    opacity: 1;
-    transform: translateX(-50%) scale(1.8);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(-50%) scale(6);
-  }
-}
-
-/* ---------- Small screens (phones) ---------- */
-/* She will most likely open this on a phone, so this is the everyday case. */
-@media (max-width: 640px) {
-  .page {
-    padding: 2rem 1rem;
-  }
-
-  .sheet {
-    gap: 1.25rem;
-    padding: 2.25rem 1.4rem 2rem;
-  }
-
-  .sheet--note {
-    padding: 2.75rem 1.4rem 2.5rem;
-  }
-
-  /* The countdown must still fit four columns without clipping. */
-  .counter-num {
-    font-size: 1.9rem;
-  }
-
-  .counter-label {
-    font-size: 0.85rem;
-  }
-
-  .dateline {
-    font-size: 0.85rem;
-  }
-
-  .envelope {
-    width: 80px;
-  }
-
-  .letter {
-    font-size: 1.08rem;
-    line-height: 1.9rem;
-  }
-
-  .letter p + p {
-    margin-top: 1.5rem;
-  }
-
-  .paper {
-    min-height: 7.5rem;
-    font-size: 0.92rem;
-  }
-
-  .paper-prize {
-    font-size: 1.1rem;
-  }
-
-  .gift-stage {
-    height: 15rem;
-  }
-
-  .gift-halo {
-    width: 15rem;
-    height: 15rem;
-  }
-
-  .gift {
-    width: 180px;
-    height: 172px;
-  }
-
-  .gift-body {
-    width: 140px;
-    height: 106px;
-  }
-
-  .gift-lid {
-    width: 160px;
-    height: 32px;
-    bottom: 98px;
-  }
-
-  .gift-band::after {
-    top: 40px;
-    left: -60px;
-    width: 140px;
-  }
-
-  .gift-shadow {
-    width: 148px;
-  }
-
-  .gift.is-open .gift-lid {
-    transform: translateX(-50%) translate(28px, -90px) rotate(26deg);
-  }
-
-  .audio-toggle {
-    top: 0.75rem;
-    right: 0.75rem;
-  }
-
-  .cinema-title {
-    top: 1rem;
-    font-size: 1.7rem;
-  }
-
-  .cinema-ask {
-    font-size: 1.1rem;
-  }
-
-  .cinema-note {
-    font-size: 1.25rem;
-  }
-}
-
-/* Respect the "reduce motion" setting on phones and laptops. */
-@media (prefers-reduced-motion: reduce) {
-  .petal,
-  .paper,
-  .frame,
-  .gift,
-  .gift-lid,
-  .gift-burst,
-  .caret,
-  .is-shuffling .paper {
-    animation: none;
-    transition: none;
-  }
-}
-
-/* ---------- The video ---------- */
-
 /* A little cinema: the three.js scene draws the screen, the curtains and the
    light it throws, and the HTML below only asks the questions. */
+
 .cinema {
   position: relative;
   width: 100%;
@@ -1604,610 +1122,9 @@ body {
     0 16px 34px rgba(107, 66, 72, 0.3);
 }
 
-.cinema-stage,
-.cinema-stage canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.cinema-stage.is-hidden {
-  display: none;
-}
-
-/* The source video feeds the 3D screen, so it is never shown directly. */
-.cinema-source {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* Fallback when WebGL is unavailable: just play the clip. */
-.cinema-flat {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  background: #0a0709;
-}
-
-.cinema-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1.1rem;
-  padding: 1.5rem;
-  text-align: center;
-  background: rgba(10, 7, 9, 0.62);
-  backdrop-filter: blur(3px);
-}
-
-.cinema-ask {
-  font-size: 1.2rem;
-  line-height: 1.5;
-  color: #f4ece6;
-}
-
-.cinema-note {
-  font-size: 1.35rem;
-  line-height: 1.4;
-  color: #eec3ce;
-}
-
-/* A phone tipping onto its side, drawn with one element. */
-.cinema-rotate {
-  width: 34px;
-  height: 56px;
-  border: 2px solid rgba(244, 236, 230, 0.75);
-  border-radius: 6px;
-  animation: tip 2.4s ease-in-out infinite;
-}
-
-@keyframes tip {
-  0%,
-  30% {
-    transform: rotate(0deg);
-  }
-  55%,
-  85% {
-    transform: rotate(-90deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-}
-
-/* The ghost button needs to read against the dark room, not the paper. */
-.btn-ghost--dark {
-  border-color: rgba(244, 236, 230, 0.35);
-  color: rgba(244, 236, 230, 0.8);
-}
-
-.btn-ghost--dark:hover:not(:disabled) {
-  border-color: #eec3ce;
-  color: #eec3ce;
-}
-
-/* ---------- Countdown ---------- */
-
-.counter {
-  display: flex;
-  width: 100%;
-  padding: 1.1rem 0;
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-}
-
-.counter-cell {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.counter-cell + .counter-cell {
-  border-left: 1px solid var(--rule);
-}
-
-.counter-num {
-  font-size: 2.6rem;
-  font-weight: 300;
-  line-height: 1;
-  color: var(--ink);
-}
-
-.counter-label {
-  font-family: var(--font-hand), cursive;
-  font-size: 1rem;
-  color: var(--ink-soft);
-}
-
-.envelope {
-  width: 104px;
-  color: var(--rose);
-}
-
-/* ---------- How she is feeling ---------- */
-
-.mood-faces {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2.5rem;
-}
-
-.mood-face {
-  display: block;
-  width: 5.5rem;
-  color: var(--rose);
-  background: transparent;
-  border: 0;
-  transition: transform 0.3s ease;
-}
-
-.mood-face svg {
-  width: 100%;
-  height: auto;
-  filter: drop-shadow(0 8px 16px rgba(107, 66, 72, 0.22));
-}
-
-.mood-face:hover {
-  transform: translateY(-6px) scale(1.06);
-}
-
-/* The gloomy one refuses to be picked: it spins on the spot when approached. */
-.mood-face--sad {
-  color: var(--ink-soft);
-  cursor: not-allowed;
-}
-
-.mood-face--sad:hover {
-  animation: spin-off 1.1s linear infinite;
-}
-
-@keyframes spin-off {
-  0% {
-    transform: rotate(0deg) scale(1);
-  }
-  50% {
-    transform: rotate(180deg) scale(0.88);
-  }
-  100% {
-    transform: rotate(360deg) scale(1);
-  }
-}
-
-.mood-answers {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
-/* Both answers walk away from the cursor; only "Yes" eventually gives in. */
-.mood-runner {
-  transition: transform 0.35s cubic-bezier(0.34, 1.3, 0.64, 1);
-}
-
-/* ---------- The game ---------- */
-
-/* Folded slips of paper, each with a crease down its middle. */
-.paper {
-  position: relative;
-  display: grid;
-  place-items: center;
-  min-height: 9rem;
-  padding: 1rem;
-  font-size: 1rem;
-  line-height: 1.45;
-  text-align: center;
-  color: var(--ink);
-  background: linear-gradient(100deg, #fffdfa 0%, #f3e8da 50%, #fffdfa 51%, #f0e3d3 100%);
-  border-radius: 1px;
-  box-shadow:
-    0 1px 2px rgba(107, 66, 72, 0.25),
-    0 8px 18px rgba(107, 66, 72, 0.18);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.paper:nth-child(odd) {
-  transform: rotate(-1.6deg);
-}
-
-.paper:nth-child(even) {
-  transform: rotate(1.6deg);
-}
-
-.paper:hover:not(:disabled) {
-  transform: translateY(-6px) rotate(0deg);
-  box-shadow:
-    0 1px 2px rgba(107, 66, 72, 0.25),
-    0 16px 28px rgba(107, 66, 72, 0.24);
-}
-
-.paper-num {
-  font-size: 2rem;
-  font-weight: 400;
-  color: var(--ink-soft);
-}
-
-.paper-prize {
-  font-family: var(--font-hand), cursive;
-  font-size: 1.3rem;
-  line-height: 1.3;
-  color: var(--rose);
-}
-
-/* The shuffle: the slips lift off the paper, cross over each other and land
-   again. They are identical face down, so nothing has to move for real —
-   the depth is what sells it. */
-.paper-deck {
-  perspective: 900px;
-  perspective-origin: 50% 40%;
-}
-
-.paper-deck .paper {
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-}
-
-.is-shuffling .paper {
-  animation: shuffle-card 1s cubic-bezier(0.45, 0.05, 0.3, 1) both;
-  animation-delay: calc(var(--slot) * 70ms);
-  z-index: calc(4 - var(--slot));
-}
-
-@keyframes shuffle-card {
-  0% {
-    transform: translate3d(0, 0, 0) rotateY(0deg) rotateZ(0deg);
-  }
-  28% {
-    transform: translate3d(calc(var(--dir) * 18px), -34px, 90px) rotateY(24deg) rotateZ(calc(var(--dir) * 6deg));
-  }
-  58% {
-    transform: translate3d(calc(var(--dir) * -46px), -18px, 60px) rotateY(180deg) rotateZ(calc(var(--dir) * -8deg));
-  }
-  82% {
-    transform: translate3d(calc(var(--dir) * 10px), -6px, 20px) rotateY(330deg) rotateZ(0deg);
-  }
-  100% {
-    transform: translate3d(0, 0, 0) rotateY(360deg) rotateZ(0deg);
-  }
-}
-
-.prize-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  width: 100%;
-}
-
-/* ---------- The gift box ---------- */
-
-/* The box needs room around it, or it floats alone in an empty field. */
-.gift-stage {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: min(100%, 22rem);
-  height: 17rem;
-}
-
-/* Warm light pooling around the box, as if the room were lit by it. */
-.gift-halo {
-  position: absolute;
-  width: 20rem;
-  height: 20rem;
-  border-radius: 999px;
-  background: radial-gradient(circle, rgba(255, 244, 228, 0.9), rgba(232, 179, 189, 0.3) 45%, transparent 70%);
-  pointer-events: none;
-}
-
-.gift {
-  position: relative;
-  width: 240px;
-  height: 226px;
-  cursor: pointer;
-  background: transparent;
-  border: 0;
-}
-
-.gift-shadow {
-  position: absolute;
-  left: 50%;
-  bottom: -10px;
-  width: 196px;
-  height: 22px;
-  transform: translateX(-50%);
-  border-radius: 999px;
-  background: radial-gradient(ellipse at center, rgba(107, 66, 72, 0.38), transparent 70%);
-}
-
-.gift-body {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 186px;
-  height: 140px;
-  transform: translateX(-50%);
-  border-radius: 3px;
-  background: linear-gradient(155deg, #d98b9e 0%, #b8536c 55%, #9c3e56 100%);
-  box-shadow:
-    inset 0 2px 0 rgba(255, 255, 255, 0.3),
-    0 14px 30px rgba(107, 66, 72, 0.32);
-}
-
-/* Ribbon: one band down the box, one across it. */
-.gift-band,
-.gift-band::after {
-  position: absolute;
-  background: linear-gradient(180deg, #f2ddb5, var(--gold));
-}
-
-.gift-band {
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 26px;
-  transform: translateX(-50%);
-}
-
-.gift-band::after {
-  content: '';
-  top: 54px;
-  left: -80px;
-  width: 186px;
-  height: 18px;
-  background: linear-gradient(90deg, #e6cb9b, #f2ddb5);
-  opacity: 0.9;
-}
-
-.gift-lid {
-  position: absolute;
-  left: 50%;
-  bottom: 132px;
-  width: 212px;
-  height: 40px;
-  transform: translateX(-50%);
-  border-radius: 3px;
-  background: linear-gradient(155deg, #e09aac, #b8536c);
-  box-shadow:
-    inset 0 2px 0 rgba(255, 255, 255, 0.35),
-    0 8px 18px rgba(107, 66, 72, 0.3);
-  transform-origin: left bottom;
-  transition: transform 0.9s cubic-bezier(0.34, 1.3, 0.64, 1);
-}
-
-/* The bow: two loops and a knot. */
-.gift-bow,
-.gift-bow::before,
-.gift-bow::after {
-  position: absolute;
-  background: linear-gradient(160deg, #f2ddb5, var(--gold));
-}
-
-.gift-bow {
-  top: -18px;
-  left: 50%;
-  width: 22px;
-  height: 20px;
-  transform: translateX(-50%);
-  border-radius: 6px;
-}
-
-.gift-bow::before,
-.gift-bow::after {
-  content: '';
-  top: -2px;
-  width: 40px;
-  height: 26px;
-  border-radius: 60% 40% 55% 45%;
-}
-
-.gift-bow::before {
-  left: -37px;
-  transform: rotate(-16deg);
-}
-
-.gift-bow::after {
-  right: -37px;
-  transform: rotate(16deg) scaleX(-1);
-}
-
-.gift-burst {
-  position: absolute;
-  left: 50%;
-  bottom: 86px;
-  width: 12px;
-  height: 12px;
-  transform: translateX(-50%);
-  border-radius: 999px;
-  background: #fff6e4;
-  opacity: 0;
-  box-shadow: 0 0 46px 20px rgba(242, 221, 181, 0.9);
-}
-
-.gift:hover .gift-lid {
-  transform: translateX(-50%) translateY(-8px);
-}
-
-.gift.is-open {
-  animation: gift-shake 0.45s ease-in-out;
-  pointer-events: none;
-}
-
-.gift.is-open .gift-lid {
-  transform: translateX(-50%) translate(38px, -118px) rotate(26deg);
-}
-
-.gift.is-open .gift-burst {
-  animation: gift-burst 1.1s 0.35s ease-out forwards;
-}
-
-@keyframes gift-shake {
-  0%,
-  100% {
-    transform: translateX(0) rotate(0deg);
-  }
-  25% {
-    transform: translateX(-6px) rotate(-3deg);
-  }
-  75% {
-    transform: translateX(6px) rotate(3deg);
-  }
-}
-
-@keyframes gift-burst {
-  0% {
-    opacity: 0;
-    transform: translateX(-50%) scale(0.4);
-  }
-  45% {
-    opacity: 1;
-    transform: translateX(-50%) scale(1.8);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(-50%) scale(6);
-  }
-}
-
-/* ---------- Small screens (phones) ---------- */
-/* She will most likely open this on a phone, so this is the everyday case. */
-@media (max-width: 640px) {
-  .page {
-    padding: 2rem 1rem;
-  }
-
-  .sheet {
-    gap: 1.25rem;
-    padding: 2.25rem 1.4rem 2rem;
-  }
-
-  .sheet--note {
-    padding: 2.75rem 1.4rem 2.5rem;
-  }
-
-  /* The countdown must still fit four columns without clipping. */
-  .counter-num {
-    font-size: 1.9rem;
-  }
-
-  .counter-label {
-    font-size: 0.85rem;
-  }
-
-  .dateline {
-    font-size: 0.85rem;
-  }
-
-  .envelope {
-    width: 80px;
-  }
-
-  .letter {
-    font-size: 1.08rem;
-    line-height: 1.9rem;
-  }
-
-  .letter p + p {
-    margin-top: 1.5rem;
-  }
-
-  .paper {
-    min-height: 7.5rem;
-    font-size: 0.92rem;
-  }
-
-  .paper-prize {
-    font-size: 1.1rem;
-  }
-
-  .gift-stage {
-    height: 15rem;
-  }
-
-  .gift-halo {
-    width: 15rem;
-    height: 15rem;
-  }
-
-  .gift {
-    width: 180px;
-    height: 172px;
-  }
-
-  .gift-body {
-    width: 140px;
-    height: 106px;
-  }
-
-  .gift-lid {
-    width: 160px;
-    height: 32px;
-    bottom: 98px;
-  }
-
-  .gift-band::after {
-    top: 40px;
-    left: -60px;
-    width: 140px;
-  }
-
-  .gift-shadow {
-    width: 148px;
-  }
-
-  .gift.is-open .gift-lid {
-    transform: translateX(-50%) translate(28px, -90px) rotate(26deg);
-  }
-
-  .audio-toggle {
-    top: 0.75rem;
-    right: 0.75rem;
-  }
-
-  .cinema-title {
-    top: 1rem;
-    font-size: 1.7rem;
-  }
-
-  .cinema-ask {
-    font-size: 1.1rem;
-  }
-
-  .cinema-note {
-    font-size: 1.25rem;
-  }
-}
-
-/* Respect the "reduce motion" setting on phones and laptops. */
-@media (prefers-reduced-motion: reduce) {
-  .petal,
-  .paper,
-  .frame,
-  .gift,
-  .gift-lid,
-  .gift-burst,
-  .caret,
-  .is-shuffling .paper {
-    animation: none;
-    transition: none;
-  }
-}
-
-/* ---------- The video ---------- */
-
 /* The clip was filmed upright on a phone, so it is shown in one: a titanium
    shell, a dark screen and the island at the top. */
+
 .phone {
   position: relative;
   height: min(540px, 58dvh);
@@ -2221,6 +1138,7 @@ body {
 }
 
 /* The side buttons, drawn on the shell rather than added as elements. */
+
 .phone::before,
 .phone::after {
   content: '';
@@ -2285,6 +1203,7 @@ body {
 }
 
 /* Asked before it plays, and again when it has finished. */
+
 .phone-overlay {
   position: absolute;
   inset: 0;
@@ -2314,6 +1233,7 @@ body {
 }
 
 /* Buttons sit on a phone-sized screen, so they shrink and never wrap. */
+
 .phone-overlay .btn,
 .phone-overlay .btn-ghost {
   padding: 0.55rem 1.05rem;
@@ -2321,524 +1241,98 @@ body {
   white-space: nowrap;
 }
 
-/* The ghost button needs to read against the dark screen, not the paper. */
-.btn-ghost--dark {
-  border-color: rgba(244, 236, 230, 0.35);
-  color: rgba(244, 236, 230, 0.8);
+/* Respect the "reduce motion" setting on phones and laptops. */
+
+/* ---------- The night before ---------- */
+/* The gate is the only dark screen: the letter is lying in an unlit room with
+   one warm light on it. Everything after it opens into daylight, so the unlock
+   reads like morning arriving. */
+
+.page--night {
+  background: #130b11;
 }
 
-.btn-ghost--dark:hover:not(:disabled) {
-  border-color: #eec3ce;
-  color: #eec3ce;
-}
-
-/* ---------- Countdown ---------- */
-
-.counter {
-  display: flex;
-  width: 100%;
-  padding: 1.1rem 0;
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-}
-
-.counter-cell {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.counter-cell + .counter-cell {
-  border-left: 1px solid var(--rule);
-}
-
-.counter-num {
-  font-size: 2.6rem;
-  font-weight: 300;
-  line-height: 1;
-  color: var(--ink);
-}
-
-.counter-label {
-  font-family: var(--font-hand), cursive;
-  font-size: 1rem;
-  color: var(--ink-soft);
-}
-
-.envelope {
-  width: 104px;
-  color: var(--rose);
-}
-
-/* ---------- How she is feeling ---------- */
-
-.mood-faces {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2.5rem;
-}
-
-.mood-face {
-  display: block;
-  width: 5.5rem;
-  color: var(--rose);
-  background: transparent;
-  border: 0;
-  transition: transform 0.3s ease;
-}
-
-.mood-face svg {
-  width: 100%;
-  height: auto;
-  filter: drop-shadow(0 8px 16px rgba(107, 66, 72, 0.22));
-}
-
-.mood-face:hover {
-  transform: translateY(-6px) scale(1.06);
-}
-
-/* The gloomy one refuses to be picked: it spins on the spot when approached. */
-.mood-face--sad {
-  color: var(--ink-soft);
-  cursor: not-allowed;
-}
-
-.mood-face--sad:hover {
-  animation: spin-off 1.1s linear infinite;
-}
-
-@keyframes spin-off {
-  0% {
-    transform: rotate(0deg) scale(1);
-  }
-  50% {
-    transform: rotate(180deg) scale(0.88);
-  }
-  100% {
-    transform: rotate(360deg) scale(1);
-  }
-}
-
-.mood-answers {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
-/* Both answers walk away from the cursor; only "Yes" eventually gives in. */
-.mood-runner {
-  transition: transform 0.35s cubic-bezier(0.34, 1.3, 0.64, 1);
-}
-
-/* ---------- The game ---------- */
-
-/* Folded slips of paper, each with a crease down its middle. */
-.paper {
-  position: relative;
-  display: grid;
-  place-items: center;
-  min-height: 9rem;
-  padding: 1rem;
-  font-size: 1rem;
-  line-height: 1.45;
-  text-align: center;
-  color: var(--ink);
-  background: linear-gradient(100deg, #fffdfa 0%, #f3e8da 50%, #fffdfa 51%, #f0e3d3 100%);
-  border-radius: 1px;
-  box-shadow:
-    0 1px 2px rgba(107, 66, 72, 0.25),
-    0 8px 18px rgba(107, 66, 72, 0.18);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.paper:nth-child(odd) {
-  transform: rotate(-1.6deg);
-}
-
-.paper:nth-child(even) {
-  transform: rotate(1.6deg);
-}
-
-.paper:hover:not(:disabled) {
-  transform: translateY(-6px) rotate(0deg);
-  box-shadow:
-    0 1px 2px rgba(107, 66, 72, 0.25),
-    0 16px 28px rgba(107, 66, 72, 0.24);
-}
-
-.paper-num {
-  font-size: 2rem;
-  font-weight: 400;
-  color: var(--ink-soft);
-}
-
-.paper-prize {
-  font-family: var(--font-hand), cursive;
-  font-size: 1.3rem;
-  line-height: 1.3;
-  color: var(--rose);
-}
-
-/* The shuffle: the slips lift off the paper, cross over each other and land
-   again. They are identical face down, so nothing has to move for real —
-   the depth is what sells it. */
-.paper-deck {
-  perspective: 900px;
-  perspective-origin: 50% 40%;
-}
-
-.paper-deck .paper {
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-}
-
-.is-shuffling .paper {
-  animation: shuffle-card 1s cubic-bezier(0.45, 0.05, 0.3, 1) both;
-  animation-delay: calc(var(--slot) * 70ms);
-  z-index: calc(4 - var(--slot));
-}
-
-@keyframes shuffle-card {
-  0% {
-    transform: translate3d(0, 0, 0) rotateY(0deg) rotateZ(0deg);
-  }
-  28% {
-    transform: translate3d(calc(var(--dir) * 18px), -34px, 90px) rotateY(24deg) rotateZ(calc(var(--dir) * 6deg));
-  }
-  58% {
-    transform: translate3d(calc(var(--dir) * -46px), -18px, 60px) rotateY(180deg) rotateZ(calc(var(--dir) * -8deg));
-  }
-  82% {
-    transform: translate3d(calc(var(--dir) * 10px), -6px, 20px) rotateY(330deg) rotateZ(0deg);
-  }
-  100% {
-    transform: translate3d(0, 0, 0) rotateY(360deg) rotateZ(0deg);
-  }
-}
-
-.prize-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  width: 100%;
-}
-
-/* ---------- The gift box ---------- */
-
-/* The box needs room around it, or it floats alone in an empty field. */
-.gift-stage {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: min(100%, 22rem);
-  height: 17rem;
-}
-
-/* Warm light pooling around the box, as if the room were lit by it. */
-.gift-halo {
-  position: absolute;
-  width: 20rem;
-  height: 20rem;
-  border-radius: 999px;
-  background: radial-gradient(circle, rgba(255, 244, 228, 0.9), rgba(232, 179, 189, 0.3) 45%, transparent 70%);
+.nightfall {
+  position: fixed;
+  inset: 0;
   pointer-events: none;
+  background:
+    radial-gradient(44% 38% at 50% 32%, rgba(255, 206, 168, 0.3), transparent 72%),
+    radial-gradient(70% 60% at 50% 40%, rgba(94, 40, 58, 0.55), transparent 78%),
+    radial-gradient(circle at 50% 42%, transparent 26%, rgba(6, 3, 6, 0.92) 100%);
+  animation: candle 7s ease-in-out infinite;
 }
 
-.gift {
-  position: relative;
-  width: 240px;
-  height: 226px;
-  cursor: pointer;
-  background: transparent;
-  border: 0;
-}
-
-.gift-shadow {
-  position: absolute;
-  left: 50%;
-  bottom: -10px;
-  width: 196px;
-  height: 22px;
-  transform: translateX(-50%);
-  border-radius: 999px;
-  background: radial-gradient(ellipse at center, rgba(107, 66, 72, 0.38), transparent 70%);
-}
-
-.gift-body {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 186px;
-  height: 140px;
-  transform: translateX(-50%);
-  border-radius: 3px;
-  background: linear-gradient(155deg, #d98b9e 0%, #b8536c 55%, #9c3e56 100%);
-  box-shadow:
-    inset 0 2px 0 rgba(255, 255, 255, 0.3),
-    0 14px 30px rgba(107, 66, 72, 0.32);
-}
-
-/* Ribbon: one band down the box, one across it. */
-.gift-band,
-.gift-band::after {
-  position: absolute;
-  background: linear-gradient(180deg, #f2ddb5, var(--gold));
-}
-
-.gift-band {
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 26px;
-  transform: translateX(-50%);
-}
-
-.gift-band::after {
-  content: '';
-  top: 54px;
-  left: -80px;
-  width: 186px;
-  height: 18px;
-  background: linear-gradient(90deg, #e6cb9b, #f2ddb5);
-  opacity: 0.9;
-}
-
-.gift-lid {
-  position: absolute;
-  left: 50%;
-  bottom: 132px;
-  width: 212px;
-  height: 40px;
-  transform: translateX(-50%);
-  border-radius: 3px;
-  background: linear-gradient(155deg, #e09aac, #b8536c);
-  box-shadow:
-    inset 0 2px 0 rgba(255, 255, 255, 0.35),
-    0 8px 18px rgba(107, 66, 72, 0.3);
-  transform-origin: left bottom;
-  transition: transform 0.9s cubic-bezier(0.34, 1.3, 0.64, 1);
-}
-
-/* The bow: two loops and a knot. */
-.gift-bow,
-.gift-bow::before,
-.gift-bow::after {
-  position: absolute;
-  background: linear-gradient(160deg, #f2ddb5, var(--gold));
-}
-
-.gift-bow {
-  top: -18px;
-  left: 50%;
-  width: 22px;
-  height: 20px;
-  transform: translateX(-50%);
-  border-radius: 6px;
-}
-
-.gift-bow::before,
-.gift-bow::after {
-  content: '';
-  top: -2px;
-  width: 40px;
-  height: 26px;
-  border-radius: 60% 40% 55% 45%;
-}
-
-.gift-bow::before {
-  left: -37px;
-  transform: rotate(-16deg);
-}
-
-.gift-bow::after {
-  right: -37px;
-  transform: rotate(16deg) scaleX(-1);
-}
-
-.gift-burst {
-  position: absolute;
-  left: 50%;
-  bottom: 86px;
-  width: 12px;
-  height: 12px;
-  transform: translateX(-50%);
-  border-radius: 999px;
-  background: #fff6e4;
-  opacity: 0;
-  box-shadow: 0 0 46px 20px rgba(242, 221, 181, 0.9);
-}
-
-.gift:hover .gift-lid {
-  transform: translateX(-50%) translateY(-8px);
-}
-
-.gift.is-open {
-  animation: gift-shake 0.45s ease-in-out;
-  pointer-events: none;
-}
-
-.gift.is-open .gift-lid {
-  transform: translateX(-50%) translate(38px, -118px) rotate(26deg);
-}
-
-.gift.is-open .gift-burst {
-  animation: gift-burst 1.1s 0.35s ease-out forwards;
-}
-
-@keyframes gift-shake {
+/* The light is a flame, so it never sits perfectly still. */
+@keyframes candle {
   0%,
   100% {
-    transform: translateX(0) rotate(0deg);
+    opacity: 1;
   }
-  25% {
-    transform: translateX(-6px) rotate(-3deg);
+  45% {
+    opacity: 0.93;
   }
-  75% {
-    transform: translateX(6px) rotate(3deg);
+  70% {
+    opacity: 0.97;
   }
 }
 
-@keyframes gift-burst {
+/* Dust drifting through the beam. */
+.mote {
+  position: fixed;
+  width: 3px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 224, 196, 0.9);
+  box-shadow: 0 0 8px 2px rgba(255, 206, 168, 0.55);
+  pointer-events: none;
+  animation: drift-up 11s ease-in-out infinite;
+}
+
+@keyframes drift-up {
   0% {
     opacity: 0;
-    transform: translateX(-50%) scale(0.4);
+    transform: translate3d(0, 14px, 0);
   }
-  45% {
-    opacity: 1;
-    transform: translateX(-50%) scale(1.8);
+  25%,
+  65% {
+    opacity: 0.85;
   }
   100% {
     opacity: 0;
-    transform: translateX(-50%) scale(6);
+    transform: translate3d(-18px, -46px, 0);
   }
 }
 
-/* ---------- Small screens (phones) ---------- */
-/* She will most likely open this on a phone, so this is the everyday case. */
-@media (max-width: 640px) {
-  .page {
-    padding: 2rem 1rem;
-  }
-
-  .sheet {
-    gap: 1.25rem;
-    padding: 2.25rem 1.4rem 2rem;
-  }
-
-  .sheet--note {
-    padding: 2.75rem 1.4rem 2.5rem;
-  }
-
-  /* The countdown must still fit four columns without clipping. */
-  .counter-num {
-    font-size: 1.9rem;
-  }
-
-  .counter-label {
-    font-size: 0.85rem;
-  }
-
-  .dateline {
-    font-size: 0.85rem;
-  }
-
-  .envelope {
-    width: 80px;
-  }
-
-  .letter {
-    font-size: 1.08rem;
-    line-height: 1.9rem;
-  }
-
-  .letter p + p {
-    margin-top: 1.5rem;
-  }
-
-  .paper {
-    min-height: 7.5rem;
-    font-size: 0.92rem;
-  }
-
-  .paper-prize {
-    font-size: 1.1rem;
-  }
-
-  .gift-stage {
-    height: 15rem;
-  }
-
-  .gift-halo {
-    width: 15rem;
-    height: 15rem;
-  }
-
-  .gift {
-    width: 180px;
-    height: 172px;
-  }
-
-  .gift-body {
-    width: 140px;
-    height: 106px;
-  }
-
-  .gift-lid {
-    width: 160px;
-    height: 32px;
-    bottom: 98px;
-  }
-
-  .gift-band::after {
-    top: 40px;
-    left: -60px;
-    width: 140px;
-  }
-
-  .gift-shadow {
-    width: 148px;
-  }
-
-  .gift.is-open .gift-lid {
-    transform: translateX(-50%) translate(28px, -90px) rotate(26deg);
-  }
-
-  .audio-toggle {
-    top: 0.75rem;
-    right: 0.75rem;
-  }
-
-  .cinema-title {
-    top: 1rem;
-    font-size: 1.7rem;
-  }
-
-  .cinema-ask {
-    font-size: 1.1rem;
-  }
-
-  .cinema-note {
-    font-size: 1.25rem;
-  }
+/* In the dark the petals are only rimmed by the light. */
+.page--night .petal {
+  background: linear-gradient(140deg, rgba(232, 179, 189, 0.5), rgba(120, 44, 64, 0.65));
+  box-shadow: 0 0 10px rgba(255, 196, 176, 0.18);
 }
 
-/* Respect the "reduce motion" setting on phones and laptops. */
-@media (prefers-reduced-motion: reduce) {
-  .petal,
-  .paper,
-  .frame,
-  .gift,
-  .gift-lid,
-  .gift-burst,
-  .caret,
-  .is-shuffling .paper {
-    animation: none;
-    transition: none;
-  }
+/* The lit sheet: bright where the light lands, falling into shadow at the
+   corners, with a warm halo spilling onto the table around it. */
+.sheet--lit {
+  background: linear-gradient(168deg, #fdf8f1 0%, #f3e6d5 62%, #e4cdb9 100%);
+  box-shadow:
+    0 2px 3px rgba(0, 0, 0, 0.5),
+    0 26px 70px rgba(0, 0, 0, 0.65),
+    0 0 90px 12px rgba(255, 190, 150, 0.16);
+}
+
+.sheet--lit::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(70% 55% at 50% 26%, transparent 40%, rgba(58, 26, 34, 0.26) 100%);
+}
+
+/* The wax seal is the one thing in the room that glows. */
+.page--night .envelope {
+  filter: drop-shadow(0 0 14px rgba(214, 152, 92, 0.55));
+}
+
+.page--night .dateline {
+  color: #b97f45;
 }

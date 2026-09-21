@@ -1,0 +1,21 @@
+- generic [active] [ref=f18e1]:
+  - main [ref=f18e2]:
+    - generic [ref=f18e3]:
+      - paragraph [ref=f18e11]: 27 September 2026
+      - heading "Your Special Day" [level=1] [ref=f18e12]
+      - generic [ref=f18e13]:
+        - generic [ref=f18e14]:
+          - generic [ref=f18e15]: "05"
+          - generic [ref=f18e16]: days
+        - generic [ref=f18e17]:
+          - generic [ref=f18e18]: "03"
+          - generic [ref=f18e19]: hours
+        - generic [ref=f18e20]:
+          - generic [ref=f18e21]: "14"
+          - generic [ref=f18e22]: minutes
+        - generic [ref=f18e23]:
+          - generic [ref=f18e24]: "53"
+          - generic [ref=f18e25]: seconds
+      - paragraph [ref=f18e35]: There's something in here. It only opens on your birthday.
+  - button "Open Next.js Dev Tools" [ref=f18e41] [cursor=pointer]
+  - alert [ref=f18e45]

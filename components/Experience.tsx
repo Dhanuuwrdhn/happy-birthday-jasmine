@@ -15,22 +15,20 @@ type Step = (typeof STEPS)[number]
 
 export default function Experience() {
   const [step, setStep] = useState<Step>('special')
-  const [playing, setPlaying] = useState(false)
   /** Covers the switch out of the dark room so the next page is not a hard cut. */
   const [veiled, setVeiled] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
-  /** Whether the song is meant to be on, regardless of what the browser allows. */
-  const wantsSong = useRef(false)
+  /** Whether the song is meant to be on. Only the video turns it off. */
+  const wantsSong = useRef(true)
 
-  // A browser can refuse to resume audio outside a gesture, so her next tap
-  // anywhere quietly puts the song back on.
+  // A browser will not start audio before she has touched the page, and can
+  // refuse to resume it outside a gesture. So every tap quietly tries again —
+  // she never has to think about the song.
   useEffect(() => {
     const retry = () => {
       const el = audioRef.current
       if (!wantsSong.current || !el || !el.paused) return
-      el.play()
-        .then(() => setPlaying(true))
-        .catch(() => {})
+      el.play().catch(() => {})
     }
     document.addEventListener('pointerdown', retry)
     return () => document.removeEventListener('pointerdown', retry)
@@ -40,37 +38,15 @@ export default function Experience() {
     setStep((s) => STEPS[Math.min(STEPS.indexOf(s) + 1, STEPS.length - 1)])
   }
 
+  /** Only the video does this, and only for as long as it runs. */
   function pauseAudio() {
-    const el = audioRef.current
-    if (el && !el.paused) {
-      el.pause()
-      setPlaying(false)
-    }
+    wantsSong.current = false
+    audioRef.current?.pause()
   }
 
   function resumeAudio() {
     wantsSong.current = true
-    audioRef.current
-      ?.play()
-      .then(() => setPlaying(true))
-      .catch(() => setPlaying(false))
-  }
-
-  function toggleAudio() {
-    const el = audioRef.current
-    if (!el) return
-    if (el.paused) {
-      wantsSong.current = true
-      // The browser may refuse before a user gesture; ignore it, the button stays available.
-      el.play()
-        .then(() => setPlaying(true))
-        .catch(() => setPlaying(false))
-    } else {
-      // Turning it off by hand means it stays off until she says otherwise.
-      wantsSong.current = false
-      el.pause()
-      setPlaying(false)
-    }
+    audioRef.current?.play().catch(() => {})
   }
 
   return (
@@ -84,10 +60,6 @@ export default function Experience() {
         <div className="page-veil" aria-hidden onAnimationEnd={() => setVeiled(false)} />
       )}
 
-      <button onClick={toggleAudio} className="audio-toggle label" title={content.audioTitle}>
-        {playing ? content.ui.soundOn : content.ui.soundOff}
-      </button>
-
       {step === 'special' && (
         <section className="sheet sheet--note text-center">
           <JasmineSprig />
@@ -99,8 +71,8 @@ export default function Experience() {
           </div>
           <button
             onClick={() => {
-              // First tap of the visit, so it is also the browser's permission to play music.
-              toggleAudio()
+              // Her first tap of the visit: the browser's permission to play.
+              resumeAudio()
               next()
             }}
             className="btn"
