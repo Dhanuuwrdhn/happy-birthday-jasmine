@@ -8,11 +8,12 @@
     "not_found_handling": "404-page"
   },
   // Keep request logs so a failure on her birthday can actually be looked at.
+  // `persist` is left out on purpose: storing logs is a paid-plan feature and
+  // the deploy is rejected without it.
   "observability": {
     "logs": {
       "enabled": true,
-      "invocation_logs": true,
-      "persist": true
+      "invocation_logs": true
     }
   }
 }
