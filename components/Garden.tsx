@@ -13,8 +13,11 @@ const BOKEH = [
 /**
  * The room around the letter: jasmine growing in from the corners and a few
  * soft lights behind it, so the page is never just a card on an empty field.
+ *
+ * `photos` hangs the photographs beside it. The countdown leaves them off —
+ * the whole point of that screen is that nothing has been opened yet.
  */
-export default function Garden() {
+export default function Garden({ photos = false }: { photos?: boolean }) {
   return (
     <>
       {BOKEH.map((b, i) => (
@@ -26,8 +29,12 @@ export default function Garden() {
         />
       ))}
 
-      <PhotoLine side="left" photos={content.hangingLeft} />
-      <PhotoLine side="right" photos={content.hangingRight} />
+      {photos && (
+        <>
+          <PhotoLine side="left" photos={content.hangingLeft} />
+          <PhotoLine side="right" photos={content.hangingRight} />
+        </>
+      )}
 
       <div className="vine vine--tl" aria-hidden>
         <JasmineSprig />

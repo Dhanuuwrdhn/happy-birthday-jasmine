@@ -54,7 +54,7 @@ export default function Experience() {
     <main className="page">
       <div className="aurora" aria-hidden />
       <div className="grain" aria-hidden />
-      <Garden />
+      <Garden photos />
       <Petals />
       <audio
         ref={audioRef}
