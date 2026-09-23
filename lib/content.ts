@@ -17,8 +17,11 @@ export const content = {
   from: 'Danu',
 
   // Background song. It pauses on its own while the video is playing.
-  audioSrc: '/audio/happy-birthday-piano.mp3',
-  audioTitle: 'Happy Birthday — piano cover by Miranda Wong',
+  // TODO(dhanu): drop the track at public/audio/valentine-laufey.mp3
+  audioSrc: '/audio/valentine-laufey.mp3',
+  // Played instead if the track above is missing, so the site is never silent.
+  audioFallback: '/audio/happy-birthday-piano.mp3',
+  audioTitle: 'Laufey — Valentine',
 
   // --- Countdown screen (she can open this any time before the date) ---
   gate: {

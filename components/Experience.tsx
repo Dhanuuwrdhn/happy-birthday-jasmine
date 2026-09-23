@@ -56,7 +56,19 @@ export default function Experience() {
       <div className="grain" aria-hidden />
       <Garden />
       <Petals />
-      <audio ref={audioRef} src={content.audioSrc} loop preload="none" />
+      <audio
+        ref={audioRef}
+        src={content.audioSrc}
+        loop
+        preload="none"
+        // If the chosen track is missing, fall back rather than play nothing.
+        onError={() => {
+          const el = audioRef.current
+          if (!el || el.src.endsWith(content.audioFallback)) return
+          el.src = content.audioFallback
+          if (wantsSong.current) el.play().catch(() => {})
+        }}
+      />
 
       {veiled && (
         <div className="page-veil" aria-hidden onAnimationEnd={() => setVeiled(false)} />
