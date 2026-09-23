@@ -33,18 +33,14 @@ export const content = {
     cta: 'Open the letter',
   },
 
-  /**
-   * The letter. One string = one paragraph.
-   * Write specific moments, not general compliments — that's what makes it read honest.
-   * TODO(dhanu): replace every [bracket] with what actually happened between you two.
-   */
+  // The letter, in his own words.
   letter: [
-    "I'm not good at writing, so sorry if this goes in circles.",
-    'I still remember [where you two first met]. You were [a small thing she did that day]. I remember something that trivial, and it still hasn\'t faded.',
-    'What I\'m most thankful for isn\'t the big things. It\'s [a small habit of hers you love] — something you probably don\'t even notice you do.',
-    'This year we went through [the hard thing you got through together]. And you stayed. That\'s not a small thing, and I don\'t want to treat it like it was.',
-    'Next year I want us to [one concrete thing you want to do with her]. Actually do it, not just talk about it.',
-    'Happy birthday. I love you.',
+    'I am bad at writing things like this, but I wanted to try anyway.',
+    'Happy birthday. You achieved so much last year, and you have accomplished just as much again this year.',
+    'Seeing you help your parents and lower your ego to save money makes me proud.',
+    'Thank you for spending so much time with me and staying by my side through my mood swings.',
+    'I hope we keep going together. Just try not to get angry all the time, or someone else might take me away.',
+    'Happy birthday. I love you, sayang.',
   ],
 
   // --- The video: its own screen, right after the letter ---
