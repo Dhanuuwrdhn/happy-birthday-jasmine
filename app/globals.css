@@ -1304,6 +1304,102 @@ body {
   transform: rotate(20deg) scaleX(-1);
 }
 
+/* A cord down each side with photographs pegged to it. Decorative only, so it
+   steps aside on narrower screens rather than crowding the card. */
+.photo-line {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.75rem;
+  width: 11rem;
+  pointer-events: none;
+}
+
+.photo-line--left {
+  left: 3.5%;
+}
+
+.photo-line--right {
+  right: 3.5%;
+}
+
+/* The cord itself, hanging the full height behind the frames. */
+.photo-cord {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(107, 66, 72, 0.35) 12%, rgba(107, 66, 72, 0.35) 88%, transparent);
+}
+
+.hang {
+  position: relative;
+  padding: 0.55rem 0.55rem 1.6rem;
+  background: #fffdfa;
+  border-radius: 1px;
+  box-shadow:
+    0 1px 2px rgba(107, 66, 72, 0.26),
+    0 12px 26px rgba(107, 66, 72, 0.22);
+  transform-origin: top center;
+  animation: sway 7s ease-in-out infinite;
+}
+
+.hang:nth-child(odd) {
+  rotate: -1.6deg;
+}
+
+.hang:nth-child(even) {
+  rotate: 1.8deg;
+}
+
+/* The wooden peg holding each print to the cord. */
+.hang-peg {
+  position: absolute;
+  top: -0.6rem;
+  left: 50%;
+  width: 0.9rem;
+  height: 1.3rem;
+  transform: translateX(-50%);
+  border-radius: 2px;
+  background: linear-gradient(180deg, #d9b489, #b98f63);
+  box-shadow: 0 1px 2px rgba(107, 66, 72, 0.35);
+}
+
+.hang-photo {
+  display: block;
+  width: 8.5rem;
+  aspect-ratio: 1;
+  object-fit: cover;
+  background: var(--paper-edge);
+}
+
+.hang-photo--blank {
+  background: linear-gradient(160deg, var(--paper-edge), #e7d6c3);
+}
+
+/* Hung on a cord, so it never hangs perfectly still. */
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-1.1deg);
+  }
+  50% {
+    transform: rotate(1.1deg);
+  }
+}
+
+/* Wide screens only: below this the card needs the room more than the photos do. */
+@media (min-width: 1280px) {
+  .photo-line {
+    display: flex;
+  }
+}
+
 /* Gold specks drifting through the light. */
 .mote {
   position: fixed;

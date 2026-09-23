@@ -43,6 +43,13 @@ export const content = {
     'Happy birthday. I love you, sayang.',
   ],
 
+  /**
+   * Photographs pegged to the cords down the sides of the page. Drop the files
+   * in public/photos/ — any that are missing simply hang as blank frames.
+   */
+  hangingLeft: ['/photos/01.jpg', '/photos/02.jpg', '/photos/03.jpg'],
+  hangingRight: ['/photos/04.jpg', '/photos/05.jpg', '/photos/06.jpg'],
+
   // --- The video: its own screen, right after the letter ---
   // Put the file at public/videos/our-memories.mp4 (keep it under 25 MB — that is
   // the per-file limit on Cloudflare, so compress it if your phone's clip is bigger).

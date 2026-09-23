@@ -1,4 +1,6 @@
+import { content } from '@/lib/content'
 import { JasmineSprig } from '@/components/Jasmine'
+import PhotoLine from '@/components/PhotoLine'
 
 /** Warm out-of-focus lights, placed to frame the card without crowding it. */
 const BOKEH = [
@@ -23,6 +25,9 @@ export default function Garden() {
           style={{ left: b.left, top: b.top, width: b.size, height: b.size, animationDelay: b.delay }}
         />
       ))}
+
+      <PhotoLine side="left" photos={content.hangingLeft} />
+      <PhotoLine side="right" photos={content.hangingRight} />
 
       <div className="vine vine--tl" aria-hidden>
         <JasmineSprig />
