@@ -35,6 +35,16 @@ function Face({ mood }: { mood: 'happy' | 'sad' }) {
 
 export default function Mood({ onDone }: { onDone: () => void }) {
   const [asked, setAsked] = useState(false)
+  /** The gloomy face is not an option; it leaves as soon as she reaches for it. */
+  const [sadGone, setSadGone] = useState(false)
+  /** Taken out of the page once it has finished leaving, so it cannot linger. */
+  const [sadRemoved, setSadRemoved] = useState(false)
+
+  function waveOffSad() {
+    if (sadGone) return
+    setSadGone(true)
+    window.setTimeout(() => setSadRemoved(true), 560)
+  }
   const [yesRuns, setYesRuns] = useState(0)
   const [noRuns, setNoRuns] = useState(0)
 
@@ -64,19 +74,27 @@ export default function Mood({ onDone }: { onDone: () => void }) {
             <span className="hand">{content.mood.happy}</span>
           </button>
 
-          {/* It spins away from her the moment she reaches for it. */}
-          <span className="mood-pick mood-pick--sad" role="presentation">
-            <span className="mood-face">
-              <Face mood="sad" />
+          {/* It spins once, then vanishes — leaving the happy one in the middle. */}
+          {!sadRemoved && (
+            <span
+              className={`mood-pick mood-pick--sad ${sadGone ? 'is-gone' : ''}`}
+              role="presentation"
+              onPointerEnter={waveOffSad}
+              onMouseEnter={waveOffSad}
+              onClick={waveOffSad}
+            >
+              <span className="mood-face">
+                <Face mood="sad" />
+              </span>
+              <span className="hand">{content.mood.sad}</span>
             </span>
-            <span className="hand">{content.mood.sad}</span>
-          </span>
+          )}
         </div>
 
         <div className="rule" aria-hidden>
           <JasmineMark />
         </div>
-        <p className="hand">{content.mood.hint}</p>
+        <p className="hand">{sadGone ? content.mood.sadGone : content.mood.hint}</p>
       </section>
     )
   }

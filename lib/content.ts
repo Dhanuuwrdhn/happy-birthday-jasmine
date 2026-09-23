@@ -95,6 +95,13 @@ export const content = {
 
   prizeFound: 'Found one. One more in there.',
 
+  // Shown the moment the first prize turns up.
+  foundOne: {
+    title: 'You found one!',
+    line: 'There is still one more hiding in there. Keep going.',
+    cta: 'Keep looking',
+  },
+
   // Shown once she has uncovered both.
   win: {
     title: 'Congratulations',
@@ -108,6 +115,7 @@ export const content = {
     happy: 'happy',
     sad: 'gloomy',
     hint: 'go on, pick',
+    sadGone: 'that one is not available today',
     confirm: "Are you sure you're happy?",
     confirmSub: 'I want to hear it properly.',
     yes: 'Yes',
