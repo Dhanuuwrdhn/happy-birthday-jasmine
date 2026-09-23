@@ -1373,7 +1373,9 @@ body {
 .hang-photo {
   display: block;
   width: 8.5rem;
-  aspect-ratio: 1;
+  /* The photographs are all portrait, so the prints are too — a square crop
+     would cut faces off. */
+  aspect-ratio: 4 / 5;
   object-fit: cover;
   background: var(--paper-edge);
 }
